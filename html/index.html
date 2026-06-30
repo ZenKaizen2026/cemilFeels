@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CemilFeels</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/index.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <h1>CemilFeels</h1>
+        <span class="subtitle">Treat Your Mood Today ✨</span>
+        
+        <div class="form-group">
+            <label>👋 Siapa namamu?</label>
+            <input type="text" id="nama" placeholder="Ketik nama panggilan...">
+        </div>
+
+        <div class="form-group">
+            <label>Mau diantar / ambil?</label>
+            <div class="delivery-options">
+                <div class="delivery-option active" id="opt-pickup" onclick="pilihMetode('pickup')">
+                    <i class="fas fa-store"></i> Ambil Sendiri
+                </div>
+                <div class="delivery-option" id="opt-delivery" onclick="pilihMetode('delivery')">
+                    <i class="fas fa-motorcycle"></i> Delivery
+                </div>
+            </div>
+            <div id="info-lokasi" style="margin-top:15px; font-size:0.9rem; color:var(--text-grey); background:#f8f9fa; padding:10px; border-radius:12px;">
+                </div>
+            <input type="text" id="alamat" class="hidden" placeholder="Detail Alamat / Patokan..." style="margin-top: 10px;">
+        </div>
+
+        <div class="form-group">
+            <label>🤔 Lagi merasa apa sekarang?</label>
+            <div class="mood-grid">
+                <div class="mood-card mood-1" onclick="pilihMood(1, this)">
+                    <i class="fas fa-fire"></i> <span>Stress / Marah</span>
+                </div>
+                <div class="mood-card mood-2" onclick="pilihMood(2, this)">
+                    <i class="fas fa-cloud-showers-heavy"></i> <span>Sedih / Galau</span>
+                </div>
+                <div class="mood-card mood-3" onclick="pilihMood(3, this)">
+                    <i class="fas fa-meh-rolling-eyes"></i> <span>Gabut / Bosan</span>
+                </div>
+                <div class="mood-card mood-4" onclick="pilihMood(4, this)">
+                    <i class="fas fa-laugh-beam"></i> <span>Happy / Lapar</span>
+                </div>
+            </div>
+            <input type="hidden" id="selected_mood" value="0">
+        </div>
+
+        <div id="menu-trigger-area" class="hidden form-group">
+            <label>👇 Rekomendasi Menu Untukmu</label>
+            <button class="btn-open-menu" onclick="bukaModalMenu()">
+                <i class="fas fa-utensils"></i> LIHAT MENU SPESIAL
+            </button>
+            
+            <div id="food-preview" class="hidden" style="margin-top:15px; background:var(--primary-soft); padding:15px; border-radius:12px; border:2px solid var(--primary); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size:0.8rem; color:var(--primary);">Menu Terpilih:</span><br>
+                    <strong id="preview-food-name" style="font-size:1.05rem;">-</strong>
+                </div>
+                <strong id="preview-food-price" style="color:var(--primary); font-size:1.1rem;">-</strong>
+            </div>
+        </div>
+
+        <div id="zona-pedas" class="hidden form-group" style="background: #fff0ed; padding: 15px; border-radius: 16px; border: 1px dashed var(--primary);">
+             <label style="color: #d63031; margin-bottom:5px;"><i class="fas fa-triangle-exclamation"></i> Zona Bahaya Pedas</label>
+             <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <input type="checkbox" id="punya_maag" style="width:20px; height:20px;">
+                <span style="font-size:0.9rem;">Ada riwayat Maag?</span>
+             </div>
+             <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:0.9rem; flex:1;">Level Pedas (1-5):</span>
+                <input type="number" id="level_pedas" min="1" max="5" value="1" style="width:70px;">
+             </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 25px;">
+            <label>🥤 Tambah Minuman Segar?</label>
+            <div class="drink-grid">
+                <div class="drink-card" onclick="pilihMinum(this, 'Es Teh Kecil', 3000)">
+                    <span class="d-name">Es Teh Kecil</span>
+                    <span class="d-price">Rp 3.000</span>
+                    <i class="fas fa-plus-circle d-icon"></i>
+                </div>
+                <div class="drink-card" onclick="pilihMinum(this, 'Es Teh JUMBO', 5000)">
+                    <span class="d-name">Es Teh JUMBO</span>
+                    <span class="d-price">Rp 5.000</span>
+                    <i class="fas fa-plus-circle d-icon"></i>
+                </div>
+                 <div class="drink-card" onclick="pilihMinum(this, 'Es Jeruk Peras', 5000)">
+                    <span class="d-name">Es Jeruk Peras</span>
+                    <span class="d-price">Rp 5.000</span>
+                    <i class="fas fa-plus-circle d-icon"></i>
+                </div>
+                 <div class="drink-card" onclick="pilihMinum(this, 'Air Mineral', 3000)">
+                    <span class="d-name">Air Mineral</span>
+                    <span class="d-price">Rp 3.000</span>
+                    <i class="fas fa-plus-circle d-icon"></i>
+                </div>
+            </div>
+            <input type="hidden" id="selected_drink_name" value="-">
+            <input type="hidden" id="selected_drink_price" value="0">
+        </div>
+
+        <button class="btn-pesan" onclick="kirimKeWA()">
+            <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Pesan Sekarang !
+        </button>
+
+        
+    </div>
+
+
+    <div class="modal-overlay" id="menuModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title" id="modalTitle">Pilih Menunya</span>
+                <button class="btn-close-modal" onclick="tutupModalMenu()"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div id="modal-food-container">
+                </div>
+        </div>
+    </div>
+    <footer class="credit" style="color:white; text-shadow: 0 2px 5px rgba(0,0,0,0.5);padding-left:12;">Created by Senziggkgtigio</footer>
+    <script src="../js/index.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+

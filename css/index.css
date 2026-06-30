@@ -1,0 +1,123 @@
+/* --- STYLE DASAR & VARIABLES --- */
+        :root {
+            --primary: #EE6F57;
+            --primary-soft: #fff0ed;
+            --secondary: #32E0C4;
+            --text-dark: #2D3436;
+            --text-grey: #636e72;
+            --bg-body: #F0F2F5;
+            --card-radius: 16px;
+        }
+        body {
+            font-family: 'Poppins', sans-serif; margin: 0; padding: 20px; min-height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; justify-content: center; align-items: center;
+        }
+        /* Lapisan gelap di atas background agar teks terbaca */
+        body::before { content:''; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index:-1; }
+
+        .main-container {
+            background-color: #ffffff; padding: 25px; border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); max-width: 420px; width: 100%;
+            position: relative; overflow: hidden; backdrop-filter: blur(10px); /* Sedikit efek kaca di container utama */
+        }
+
+        h1 { color: var(--text-dark); text-align: center; margin: 5px 0; font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; }
+        .subtitle { text-align: center; color: var(--primary); font-size: 0.9rem; font-weight: 500; margin-bottom: 25px; display: block; }
+        
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--text-dark); font-size: 0.95rem; }
+        input[type="text"], input[type="number"] {
+            width: 100%; padding: 14px; border-radius: var(--card-radius); border: 2px solid #f1f2f6;
+            background: #f8f9fa; font-family: 'Poppins'; font-size: 1rem; box-sizing: border-box; transition: 0.3s;
+        }
+        input:focus { border-color: var(--primary); background: #fff; outline: none; }
+
+        /* --- MODERN MOOD SELECTOR --- */
+        .mood-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .mood-card {
+            background: #fff; border: 2px solid #f1f2f6; border-radius: var(--card-radius);
+            padding: 15px; text-align: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .mood-card i { font-size: 2.2rem; margin-bottom: 10px; transition: 0.3s; }
+        .mood-card span { font-size: 0.85rem; font-weight: 600; color: var(--text-grey); }
+        
+        /* State Aktif Mood */
+        .mood-card.active { border-color: var(--primary); background: var(--primary-soft); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(238, 111, 87, 0.15); }
+        .mood-1 i { color: #ff4757; } .mood-2 i { color: #5352ed; }
+        .mood-3 i { color: #ffa502; } .mood-4 i { color: #2ed573; }
+
+        /* --- TOMBOL BUKA MENU (Muncul setelah pilih mood) --- */
+        .btn-open-menu {
+            width: 100%; padding: 15px; background: var(--text-dark); color: white;
+            border: none; border-radius: var(--card-radius); font-size: 1rem; font-weight: 600;
+            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px;
+            transition: 0.3s; animation: slideUpFade 0.5s ease;
+        }
+        .btn-open-menu:hover { background: #000; transform: scale(1.02); }
+        @keyframes slideUpFade { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+        /* --- MODERN DRINK SELECTOR (Pengganti Dropdown) --- */
+        .drink-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .drink-card {
+            background: #fff; border: 2px solid #f1f2f6; border-radius: 12px; padding: 12px;
+            text-align: left; cursor: pointer; transition: 0.2s; position: relative;
+        }
+        .drink-card .d-name { font-weight: 600; font-size: 0.9rem; color: var(--text-dark); display: block; }
+        .drink-card .d-price { font-size: 0.85rem; color: var(--primary); font-weight: 500; }
+        .drink-card .d-icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #ddd; font-size: 1.2rem; }
+        .drink-card.active { border-color: var(--primary); background: var(--primary-soft); }
+        .drink-card.active .d-icon { color: var(--primary); }
+
+
+        /* --- MODAL MENU MAKANAN (Tampilan Layar Timbul Modern) --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Gelap transparan */
+            backdrop-filter: blur(12px); /* EFEK BLUR MODERN KACA BURAM */
+            -webkit-backdrop-filter: blur(12px); /* Support Safari */
+            z-index: 1000; display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; box-sizing: border-box;
+        }
+        .modal-overlay.show { opacity: 1; pointer-events: auto; }
+
+        .modal-content {
+            background: #fff; width: 100%; max-width: 400px; border-radius: 24px;
+            padding: 25px; position: relative; transform: translateY(50px); transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            max-height: 85vh; overflow-y: auto; /* Agar bisa discroll jika menu banyak */
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .modal-overlay.show .modal-content { transform: translateY(0); }
+
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-title { font-size: 1.2rem; font-weight: 700; color: var(--text-dark); }
+        .btn-close-modal { background: #f1f2f6; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; color: var(--text-dark); cursor: pointer; transition:0.2s; }
+        .btn-close-modal:hover { background: #e1e2e6; }
+
+        /* KARTU MAKANAN BESAR DI DALAM MODAL */
+        .big-food-card {
+            background: #fff; border-radius: 20px; overflow: hidden; margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 2px solid #f1f2f6; cursor: pointer; transition: 0.3s;
+        }
+        .big-food-img {
+            width: 100%; height: 180px; /* GAMBAR BESAR */
+            object-fit: cover; background: #eee;
+        }
+        .big-food-details { padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .food-name-large { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); }
+        .food-price-large { font-size: 1rem; font-weight: 600; color: var(--primary); }
+        
+        .big-food-card.active { border-color: var(--primary); background: var(--primary-soft); transform: scale(1.02); }
+
+
+        /* --- LAINNYA --- */
+        .hidden { display: none; }
+        .delivery-options { display: flex; gap: 12px; background: #f8f9fa; padding: 5px; border-radius: 16px; }
+        .delivery-option { flex: 1; padding: 12px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-grey); transition: 0.3s; }
+        .delivery-option.active { background: #fff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+        .btn-pesan { width: 100%; padding: 16px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border: none; border-radius: var(--card-radius); font-size: 1.1rem; cursor: pointer; font-weight: 600; margin-top: 25px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
+        .btn-pesan:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4); }
+        .credit { text-align: center; margin-top: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.7); }
