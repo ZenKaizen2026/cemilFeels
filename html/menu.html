@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CemilFeels - Pilih Menu</title>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CSS Hubungan -->
+    <link rel="stylesheet" href="../css/index.css"> <!-- Mewarisi background & glass-card -->
+    <link rel="stylesheet" href="../css/menu.css">  <!-- Khusus untuk modul menu & pilihan tambahan -->
+</head>
+<body>
+
+    <div class="main-container glass-card">
+        <!-- Header Personalisasi -->
+        <div class="mb-4">
+            <h2 class="section-title">Menu Untukmu</h2>
+            <p id="user-mood-greeting" class="section-subtitle">Memuat rekomendasi...</p>
+        </div>
+
+        <!-- Bagian 1: Render Makanan Dinamis -->
+        <div class="form-group mb-4">
+            <label class="form-label-custom">👇 Pilih Salah Satu Menu Rekomendasi</label>
+            <div id="food-container" class="food-list-grid">
+                <!-- Diisi secara dinamis oleh JavaScript berdasarkan Mood -->
+            </div>
+        </div>
+
+        <!-- Bagian 2: Zona Bahaya Pedas (Hanya muncul jika mood bernilai "1" / Marah) -->
+        <div id="zona-pedas" class="form-group mb-4 hidden animate-slide">
+            <div class="spicy-box">
+                <label class="spicy-title"><i class="fas fa-triangle-exclamation"></i> Zona Bahaya Pedas</label>
+                
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <input type="checkbox" id="punya_maag" class="form-check-input-custom">
+                    <label for="punya_maag" class="form-check-label-custom">Ada riwayat penyakit Maag?</label>
+                </div>
+                
+                <div class="d-flex align-items-center justify-content-between">
+                    <span class="spicy-level-text">Level Pedas (1-5):</span>
+                    <input type="number" id="level_pedas" min="1" max="5" value="1" class="form-control-spicy">
+                </div>
+            </div>
+        </div>
+
+        <!-- Bagian 3: Grid Tambah Minuman -->
+        <div class="form-group mb-4">
+            <label class="form-label-custom">🥤 Tambah Minuman Segar? (Opsional)</label>
+            <div class="drink-grid">
+                <div class="drink-card" data-drink-name="Es Teh Kecil" data-drink-price="3000">
+                    <span class="d-name">Es Teh Kecil</span>
+                    <span class="d-price">Rp 3.000</span>
+                    <i class="fas fa-plus-circle d-icon"></i>
+                </div>
+                <div class="drink-card" data-drink-name="Es Teh JUMBO" data-drink-price="5000">
+                    <span class="d-name">Es Teh JUMBO</span>
+                    <span class="d-price">Rp 5.000</span>
+                    <i class="fas fa-plus-circle d-icon"></i>
+                </div>
+                <div class="drink-card" data-drink-name="Es Jeruk Peras" data-drink-price="5000">
+                    <span class="d-name">Es Jeruk Peras</span>
+                    <span class="d-price">Rp 5.000</span>
+                    <i class="fas fa-plus-circle d-icon"></i>
+                </div>
+                <div class="drink-card" data-drink-name="Air Mineral" data-drink-price="3000">
+                    <span class="d-name">Air Mineral</span>
+                    <span class="d-price">Rp 3.000</span>
+                    <i class="fas fa-plus-circle d-icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigasi Aksi -->
+        <div class="d-flex gap-2">
+            <button type="button" id="btn-back-to-mood" class="btn-secondary-custom">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <button type="button" id="btn-to-cart" class="btn-primary-custom flex-grow-1">
+                Lanjut ke Keranjang <i class="fas fa-shopping-cart ms-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Script Fungsional -->
+    <script src="../js/menu.js"></script>
+</body>
+</html>

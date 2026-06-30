@@ -1,0 +1,193 @@
+/* ==========================================================================
+   HEADER STYLE
+   ========================================================================== */
+.cart-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.cart-subtitle {
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   SUMMARY INFO BOX
+   ========================================================================== */
+.summary-box {
+    background: #f8f9fa;
+    border-radius: var(--card-radius);
+    padding: 15px;
+    border: 1px solid #e9ecef;
+}
+
+.summary-box-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #f1f2f6;
+    padding-bottom: 6px;
+}
+
+.summary-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.summary-item .label {
+    color: var(--text-grey);
+    font-weight: 500;
+}
+
+.summary-item .value {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   CALCULATOR TABLE STYLES
+   ========================================================================== */
+.cart-table {
+    border-collapse: collapse;
+}
+
+.cart-table th {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-grey);
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f2f6;
+}
+
+.cart-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f2f6;
+    vertical-align: top;
+}
+
+.item-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    display: block;
+}
+
+.item-customization {
+    font-size: 0.78rem;
+    color: #d63031;
+    font-weight: 500;
+    display: block;
+    margin-top: 3px;
+}
+
+.item-price {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+/* ==========================================================================
+   TOTALS OVERVIEW BOX
+   ========================================================================== */
+.total-box {
+    background: var(--primary-soft);
+    padding: 15px;
+    border-radius: var(--card-radius);
+    border: 1px solid rgba(238, 111, 87, 0.2);
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+
+.total-label {
+    color: var(--text-grey);
+    font-weight: 500;
+}
+
+.total-value {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.total-divider {
+    border: 0;
+    border-top: 1.5px solid rgba(238, 111, 87, 0.3);
+    margin: 10px 0;
+}
+
+.grand-total {
+    margin-bottom: 0;
+}
+
+.total-label-grand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.total-value-grand {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* ==========================================================================
+   ACTION BUTTONS
+   ========================================================================== */
+.btn-whatsapp {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: #ffffff;
+    padding: 15px;
+    border-radius: var(--card-radius);
+    border: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
+    color: #ffffff;
+}
+
+.btn-back-link {
+    background: none;
+    border: none;
+    color: var(--text-grey);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px;
+    transition: color var(--transition-speed) ease;
+}
+
+.btn-back-link:hover {
+    color: var(--primary);
+}
