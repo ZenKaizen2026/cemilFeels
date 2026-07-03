@@ -1,0 +1,332 @@
+:root {
+    --primary: #FF9800;
+    --primary-hover: #F57C00;
+    --bg-color: #F8F9FA;
+    --card-bg: #FFFFFF;
+    --text-main: #333333;
+    --text-muted: #757575;
+    --border-color: #E0E0E0;
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.container {
+    background-color: var(--card-bg);
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--primary);
+    background: #FFF3E0;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.header h1 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* Form Sections */
+.section-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-group {
+    margin-bottom: 30px;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 15px;
+    transition: var(--transition);
+    background-color: #FAFAFA;
+}
+
+input[type="text"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: #FFF;
+    box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
+}
+
+/* Pilihan Order (Ambil/Delivery) */
+.order-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.order-card {
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.order-card:hover {
+    border-color: #BDBDBD;
+}
+
+.order-card.active {
+    border-color: var(--primary);
+    background-color: #FFF3E0;
+}
+
+.order-card h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.order-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* Animasi Input Alamat */
+#addressContainer {
+    display: none;
+    margin-top: 15px;
+    animation: fadeIn 0.4s ease;
+}
+
+#addressContainer textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Pilihan Mood */
+.mood-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* ========================================= */
+/* FORCED FIX: MEMBUAT GAMBAR JAUH LEBIH BESAR */
+/* ========================================= */
+
+.mood-card {
+    background-color: #FAFAFA;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+    overflow: hidden;
+    
+    /* Hilangkan padding agar gambar bisa melebar maksimal sampai ke dekat border */
+    padding: 0 !important; 
+    
+    /* Rasio aspek kotak tetap dipertahankan agar tidak rusak */
+    aspect-ratio: 16 / 10; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mood-card:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+    border-color: var(--primary);
+}
+
+/* Memaksa gambar berukuran besar dan memenuhi kotakan */
+.mood-image {
+    height: 75% !important; /* Menggunakan persentase agar selalu pas dan besar mengikuti kotaknya */
+    width: auto !important;
+    max-width: 90% !important;
+    object-fit: contain;
+    transition: var(--transition);
+    display: block;
+}
+
+/* Efek zoom saat di-hover tetap dibuat proporsional */
+.mood-card:hover .mood-image {
+    transform: scale(1.05);
+}
+
+/* Tooltip keterangan disesuaikan posisinya agar tidak tertimpa gambar yang sudah besar */
+.mood-tooltip {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 2; /* Memastikan teks berada di atas gambar saat muncul */
+}
+
+.mood-card:hover .mood-tooltip {
+    bottom: 8px; /* Sedikit mepet ke bawah karena gambarnya sudah besar */
+    opacity: 1;
+}
+
+/* ========================================= */
+/*       CSS POP-UP NOTIFICATION             */
+/* ========================================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px); 
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 35px 30px; 
+    border-radius: 20px; 
+    text-align: center;
+    max-width: 360px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px; 
+}
+
+.modal-overlay.show .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.modal-mood-image {
+    width: 140px; 
+    height: 140px; 
+    object-fit: contain; 
+    margin-bottom: 0; 
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px; 
+    color: var(--text-main);
+}
+
+.btn-rekomendasi {
+    background-color: #2D3236; 
+    color: #FFFFFF;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 12px;
+    transition: var(--transition);
+}
+
+.btn-rekomendasi:hover {
+    background-color: #1A1F22;
+    transform: translateY(-2px);
+}
+
+.btn-cancel-modal {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.btn-cancel-modal:hover {
+    color: var(--text-main);
+    text-decoration: underline;
+}
+
+/* Responsivitas Mobile */
+@media (max-width: 600px) {
+    .order-options, .mood-grid {
+        grid-template-columns: 1fr;
+    }
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .container {
+        padding: 20px;
+    }
+}

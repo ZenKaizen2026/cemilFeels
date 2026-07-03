@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cemil Feels</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Perbaikan posisi header agar logo brand di kiri dan kontainer judul di kanan ujung */
+        .header {
+            display: flex !important;
+            justify-content: space-between !important; 
+            align-items: center !important;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Ukuran logo brand kiri */
+        .logo-img {
+            height: 50px; 
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo {
+            background: none !important;
+            padding: 0 !important;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Wadah khusus untuk menyatukan logo kecil dan teks judul di sebelah kanan */
+        .title-container {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* Jarak antara logo pacman kecil dengan tulisan judul */
+        }
+
+        /* Ukuran asset logo baru di sebelah kiri judul */
+        .title-icon {
+            height: 35px; /* Dibuat sedikit lebih kecil agar pas mendampingi teks h1 */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <!-- Logo utama berada di pojok kiri atas -->
+            <div class="logo">
+                <img src="CEMILLOGOpnggggggggggggg.png" alt="Cemil Feels Logo" class="logo-img">
+            </div>
+            
+            <!-- Kontainer judul otomatis bergeser ke pojok kanan atas -->
+            <div class="title-container">
+                <!-- Logo asset tambahan di sebelah kiri judul teks -->
+                <img src="CEMILAJA.png" alt="Cemil Aja Icon" class="title-icon">
+                <h1>Ekspresikan perasaanmu hari ini ✨</h1>
+            </div>
+        </header>
+
+        <!-- Input Nama -->
+        <div class="input-group">
+            <label class="section-title" for="userName">👋 Siapa namamu?</label>
+            <input type="text" id="userName" placeholder="Ketik namamu di sini...">
+        </div>
+
+        <!-- Pilihan Delivery/Ambil -->
+        <div class="input-group">
+            <p class="section-title">🛵 Mau diantar / ambil?</p>
+            <div class="order-options">
+                <div class="order-card active" id="cardAmbil" onclick="setOrderType('ambil')">
+                    <h3>Ambil Sendiri</h3>
+                    <p>Ambil langsung di **Outlet CemilFeels Pusat** (Gratis ongkir & cepat).</p>
+                </div>
+                
+                <div class="order-card" id="cardDelivery" onclick="setOrderType('delivery')">
+                    <h3>Delivery</h3>
+                    <p id="deliveryText">Estimasi pengiriman 15-30 menit tergantung jarak lokasimu.</p>
+                    <div id="addressContainer">
+                        <textarea placeholder="Masukkan alamat lengkap pengirimanmu di sini..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pilihan Mood -->
+        <div class="input-group">
+            <p class="section-title">🤔 Lagi merasa apa sekarang?</p>
+            <div class="mood-grid">
+                
+                <div class="mood-card" onclick="openMoodPopup('Marah', 'marah.png')">
+                    <img src="marah.png" alt="Marah" class="mood-image">
+                    <span class="mood-tooltip">MARAH</span>
+                </div>
+
+                <div class="mood-card" onclick="openMoodPopup('Sedih', 'sedih.png')">
+                    <img src="sedih.png" alt="Sedih" class="mood-image">
+                    <span class="mood-tooltip">SEDIH</span>
+                </div>
+
+                <div class="mood-card" onclick="openMoodPopup('Bosan', 'bosan.png')">
+                    <img src="bosan.png" alt="Bosan" class="mood-image">
+                    <span class="mood-tooltip">BOSAN</span>
+                </div>
+
+                <div class="mood-card" onclick="openMoodPopup('Senang', 'senang.png')">
+                    <img src="senang.png" alt="Senang" class="mood-image">
+                    <span class="mood-tooltip">SENANG</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ELEMEN POP-UP NOTIFICATION -->
+    <div class="modal-overlay" id="moodModal">
+        <div class="modal-content">
+            <img src="" alt="Mood Icon" class="modal-mood-image" id="modalIcon">
+            <h3 class="modal-title">Lagi <span id="modalMoodName">...</span> ya?</h3>
+            
+            <button class="btn-rekomendasi" onclick="alert('Mengalihkan ke halaman rekomendasi menu...')">
+                Lihat Menu Rekomendasi ➔
+            </button>
+            <button class="btn-cancel-modal" onclick="closeMoodPopup()">Batalkan</button>
+        </div>
+    </div>
+
+    <!-- Script Logika Interaksi -->
+    <script>
+        function setOrderType(type) {
+            const cardAmbil = document.getElementById('cardAmbil');
+            const cardDelivery = document.getElementById('cardDelivery');
+            const addressContainer = document.getElementById('addressContainer');
+            const deliveryText = document.getElementById('deliveryText');
+
+            if (type === 'ambil') {
+                cardAmbil.classList.add('active');
+                cardDelivery.classList.remove('active');
+                addressContainer.style.display = 'none';
+                deliveryText.style.display = 'block';
+            } else if (type === 'delivery') {
+                cardDelivery.classList.add('active');
+                cardAmbil.classList.remove('active');
+                addressContainer.style.display = 'block';
+                deliveryText.style.display = 'none';
+            }
+        }
+
+        const modal = document.getElementById('moodModal');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalMoodName = document.getElementById('modalMoodName');
+
+        function openMoodPopup(moodName, imageSrc) {
+            modalMoodName.innerText = moodName;
+            modalIcon.src = imageSrc;
+            modal.classList.add('show');
+        }
+
+        function closeMoodPopup() {
+            modal.classList.remove('show');
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeMoodPopup();
+            }
+        }
+    </script>
+</body>
+</html>
