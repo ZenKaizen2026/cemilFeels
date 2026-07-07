@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cemil Feels</title>
-    <link rel="stylesheet" href="style.css">
+    <title>CemilFeels - Ekspresikan Perasaanmu</title>
+    <!-- Meta Deskripsi untuk SEO -->
+    <meta name="description" content="Pilih suasana hatimu dan dapatkan rekomendasi snack terbaik dari CemilFeels.">
+    
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         /* Perbaikan posisi header agar logo brand di kiri dan kontainer judul di kanan ujung */
         .header {
@@ -58,13 +61,13 @@
         <header class="header">
             <!-- Logo utama berada di pojok kiri atas -->
             <div class="logo">
-                <img src="CEMILLOGOpnggggggggggggg.png" alt="Cemil Feels Logo" class="logo-img">
+                <img src="../img/CEMILLOGOpnggggggggggggg.png" alt="Cemil Feels Logo" class="logo-img">
             </div>
             
             <!-- Kontainer judul otomatis bergeser ke pojok kanan atas -->
             <div class="title-container">
                 <!-- Logo asset tambahan di sebelah kiri judul teks -->
-                <img src="CEMILAJA.png" alt="Cemil Aja Icon" class="title-icon">
+                <img src="../img/CEMILAJA.png" alt="Cemil Aja Icon" class="title-icon">
                 <h1>Ekspresikan perasaanmu hari ini ✨</h1>
             </div>
         </header>
@@ -79,16 +82,16 @@
         <div class="input-group">
             <p class="section-title">🛵 Mau diantar / ambil?</p>
             <div class="order-options">
-                <div class="order-card active" id="cardAmbil" onclick="setOrderType('ambil')">
+                <div class="order-card active" id="cardAmbil" data-method="pickup">
                     <h3>Ambil Sendiri</h3>
-                    <p>Ambil langsung di **Outlet CemilFeels Pusat** (Gratis ongkir & cepat).</p>
+                    <p>Ambil langsung di Outlet CemilFeels Pusat (Gratis ongkir & cepat).</p>
                 </div>
                 
-                <div class="order-card" id="cardDelivery" onclick="setOrderType('delivery')">
+                <div class="order-card" id="cardDelivery" data-method="delivery">
                     <h3>Delivery</h3>
                     <p id="deliveryText">Estimasi pengiriman 15-30 menit tergantung jarak lokasimu.</p>
                     <div id="addressContainer">
-                        <textarea placeholder="Masukkan alamat lengkap pengirimanmu di sini..."></textarea>
+                        <textarea id="userAddress" placeholder="Masukkan alamat lengkap pengirimanmu di sini..."></textarea>
                     </div>
                 </div>
             </div>
@@ -99,23 +102,23 @@
             <p class="section-title">🤔 Lagi merasa apa sekarang?</p>
             <div class="mood-grid">
                 
-                <div class="mood-card" onclick="openMoodPopup('Marah', 'marah.png')">
-                    <img src="marah.png" alt="Marah" class="mood-image">
+                <div class="mood-card" data-mood-id="1" data-mood-name="Marah" data-mood-img="../img/marah.png">
+                    <img src="../img/marah.png" alt="Marah" class="mood-image">
                     <span class="mood-tooltip">MARAH</span>
                 </div>
 
-                <div class="mood-card" onclick="openMoodPopup('Sedih', 'sedih.png')">
-                    <img src="sedih.png" alt="Sedih" class="mood-image">
+                <div class="mood-card" data-mood-id="2" data-mood-name="Sedih" data-mood-img="../img/sedih.png">
+                    <img src="../img/sedih.png" alt="Sedih" class="mood-image">
                     <span class="mood-tooltip">SEDIH</span>
                 </div>
 
-                <div class="mood-card" onclick="openMoodPopup('Bosan', 'bosan.png')">
-                    <img src="bosan.png" alt="Bosan" class="mood-image">
+                <div class="mood-card" data-mood-id="3" data-mood-name="Bosan" data-mood-img="../img/bosan.png">
+                    <img src="../img/bosan.png" alt="Bosan" class="mood-image">
                     <span class="mood-tooltip">BOSAN</span>
                 </div>
 
-                <div class="mood-card" onclick="openMoodPopup('Senang', 'senang.png')">
-                    <img src="senang.png" alt="Senang" class="mood-image">
+                <div class="mood-card" data-mood-id="4" data-mood-name="Senang" data-mood-img="../img/senang.png">
+                    <img src="../img/senang.png" alt="Senang" class="mood-image">
                     <span class="mood-tooltip">SENANG</span>
                 </div>
 
@@ -129,53 +132,14 @@
             <img src="" alt="Mood Icon" class="modal-mood-image" id="modalIcon">
             <h3 class="modal-title">Lagi <span id="modalMoodName">...</span> ya?</h3>
             
-            <button class="btn-rekomendasi" onclick="alert('Mengalihkan ke halaman rekomendasi menu...')">
+            <button class="btn-rekomendasi" id="btnConfirmMood">
                 Lihat Menu Rekomendasi ➔
             </button>
-            <button class="btn-cancel-modal" onclick="closeMoodPopup()">Batalkan</button>
+            <button class="btn-cancel-modal" id="btnCancelMood">Batalkan</button>
         </div>
     </div>
 
     <!-- Script Logika Interaksi -->
-    <script>
-        function setOrderType(type) {
-            const cardAmbil = document.getElementById('cardAmbil');
-            const cardDelivery = document.getElementById('cardDelivery');
-            const addressContainer = document.getElementById('addressContainer');
-            const deliveryText = document.getElementById('deliveryText');
-
-            if (type === 'ambil') {
-                cardAmbil.classList.add('active');
-                cardDelivery.classList.remove('active');
-                addressContainer.style.display = 'none';
-                deliveryText.style.display = 'block';
-            } else if (type === 'delivery') {
-                cardDelivery.classList.add('active');
-                cardAmbil.classList.remove('active');
-                addressContainer.style.display = 'block';
-                deliveryText.style.display = 'none';
-            }
-        }
-
-        const modal = document.getElementById('moodModal');
-        const modalIcon = document.getElementById('modalIcon');
-        const modalMoodName = document.getElementById('modalMoodName');
-
-        function openMoodPopup(moodName, imageSrc) {
-            modalMoodName.innerText = moodName;
-            modalIcon.src = imageSrc;
-            modal.classList.add('show');
-        }
-
-        function closeMoodPopup() {
-            modal.classList.remove('show');
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeMoodPopup();
-            }
-        }
-    </script>
+    <script src="../js/mood.js"></script>
 </body>
 </html>

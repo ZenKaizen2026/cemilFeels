@@ -2,29 +2,30 @@
    GLOBAL VARIABLES & RESET
    ========================================================================== */
 :root {
-    --primary: #EE6F57;
-    --primary-soft: #fff0ed;
-    --secondary: #32E0C4;
-    --text-dark: #2D3436;
-    --text-grey: #636e72;
-    --bg-body: #F0F2F5;
-    --card-radius: 16px;
+    --primary: #FF9800;
+    --primary-hover: #F57C00;
+    --primary-soft: #FFF3E0;
+    --secondary: #F57C00;
+    --text-dark: #333333;
+    --text-grey: #757575;
+    --bg-body: #F8F9FA;
+    --card-radius: 12px;
     --transition-speed: 0.3s;
+    border-radius: 12px;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    --radius: 12px;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
-    background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: var(--bg-body);
+    color: var(--text-dark);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,39 +33,36 @@ body {
     position: relative;
     z-index: 1;
     overflow-x: hidden;
-    padding: 20px;
+    padding: 40px 20px;
+    border-radius: 12px;
 }
 
 /* Lapisan gelap (overlay) di atas background agar teks kontras dan mudah dibaca */
 body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: -1;
+    display: none;
 }
 
 /* ==========================================================================
    REUSABLE COMPONENTS & UTILITIES (Akan diwariskan ke Halaman Lain)
    ========================================================================== */
 .glass-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 24px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    padding: 30px;
+    background: #FFFFFF;
+    border-radius: var(--card-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E0E0E0;
+    padding: 40px;
     width: 100%;
     transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
 /* Container utama untuk halaman form (lebar dibatasi agar fokus) */
 .main-container {
-    max-width: 420px;
-    margin: 0 auto;
+    background-color: var(--card-bg);
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 /* Utility kelas tersembunyi */
@@ -122,14 +120,14 @@ body::before {
 
 /* Tombol CTA Utama */
 .btn-cta {
-    background: linear-gradient(135deg, var(--primary), #d35400);
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
     color: #ffffff !important;
     font-size: 1.1rem;
     font-weight: 600;
     padding: 14px 35px;
     border-radius: 50px;
     border: none;
-    box-shadow: 0 8px 20px rgba(238, 111, 87, 0.4);
+    box-shadow: 0 8px 20px rgba(255, 152, 0, 0.3);
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -139,7 +137,7 @@ body::before {
 
 .btn-cta:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 25px rgba(238, 111, 87, 0.5);
+    box-shadow: 0 12px 25px rgba(255, 152, 0, 0.4);
 }
 
 .btn-cta:active {
@@ -150,5 +148,5 @@ body::before {
     text-align: center;
     margin-top: 25px;
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-grey);
 }

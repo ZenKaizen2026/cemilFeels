@@ -109,7 +109,7 @@
     background: var(--primary-soft);
     padding: 15px;
     border-radius: var(--card-radius);
-    border: 1px solid rgba(238, 111, 87, 0.2);
+    border: 1px solid rgba(255, 152, 0, 0.2);
 }
 
 .total-row {
@@ -131,7 +131,7 @@
 
 .total-divider {
     border: 0;
-    border-top: 1.5px solid rgba(238, 111, 87, 0.3);
+    border-top: 1.5px solid rgba(255, 152, 0, 0.3);
     margin: 10px 0;
 }
 

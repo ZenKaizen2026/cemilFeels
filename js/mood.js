@@ -1,18 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- ELEMENT SELECTORS ---
-    const nameInput = document.getElementById('nama');
-    const deliveryOptions = document.querySelectorAll('.delivery-option');
-    const addressInput = document.getElementById('alamat');
-    const infoLocation = document.getElementById('info-lokasi');
+    // --- 1. ELEMENT SELECTORS ---
+    const nameInput = document.getElementById('userName');
+    const cardAmbil = document.getElementById('cardAmbil');
+    const cardDelivery = document.getElementById('cardDelivery');
+    const addressContainer = document.getElementById('addressContainer');
+    const addressInput = document.getElementById('userAddress');
+    const deliveryText = document.getElementById('deliveryText');
     const moodCards = document.querySelectorAll('.mood-card');
-    const submitBtn = document.getElementById('btn-submit-mood');
+    
+    const modal = document.getElementById('moodModal');
+    const modalIcon = document.getElementById('modalIcon');
+    const modalMoodName = document.getElementById('modalMoodName');
+    const btnConfirm = document.getElementById('btnConfirmMood');
+    const btnCancel = document.getElementById('btnCancelMood');
 
-    // --- STATE VARIABLES ---
+    // --- 2. STATE VARIABLES ---
     let selectedDelivery = 'pickup';
     let selectedMoodId = null;
 
-    // --- LOCAL STORAGE: BACA DATA SEBELUMNYA (AUTO-FILL) ---
-    // Mengizinkan pengguna kembali dari halaman menu tanpa mengisi ulang data dari nol
+    // --- 3. LOCAL STORAGE: READ EXISTING DATA (AUTO-FILL) ---
     const checkExistingData = () => {
         const savedName = localStorage.getItem('user_name');
         const savedDelivery = localStorage.getItem('delivery_method');
@@ -30,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 addressInput.value = savedAddress;
             }
         } else {
-            // Default awal apabila belum ada data delivery terpilih
             updateDeliveryUI('pickup');
         }
 
@@ -39,85 +44,103 @@ document.addEventListener('DOMContentLoaded', () => {
             moodCards.forEach(card => {
                 if (parseInt(card.dataset.moodId, 10) === selectedMoodId) {
                     card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
                 }
             });
         }
     };
 
-    // --- INTERAKSI METODE PENGIRIMAN ---
+    // --- 4. DELIVERY METHOD UI INTERACTION ---
     const updateDeliveryUI = (method) => {
-        deliveryOptions.forEach(opt => opt.classList.remove('active'));
-        
         if (method === 'pickup') {
-            document.getElementById('opt-pickup').classList.add('active');
-            addressInput.classList.add('hidden');
+            cardAmbil.classList.add('active');
+            cardDelivery.classList.remove('active');
+            addressContainer.style.display = 'none';
+            if (deliveryText) deliveryText.style.display = 'block';
             addressInput.removeAttribute('required');
-            infoLocation.innerHTML = `<i class="fas fa-store-alt me-1"></i> Ambil langsung di **Outlet CemilFeels Pusat** (Gratis ongkir & cepat).`;
         } else {
-            document.getElementById('opt-delivery').classList.add('active');
-            addressInput.classList.remove('hidden');
+            cardDelivery.classList.add('active');
+            cardAmbil.classList.remove('active');
+            addressContainer.style.display = 'block';
+            if (deliveryText) deliveryText.style.display = 'none';
             addressInput.setAttribute('required', 'true');
-            infoLocation.innerHTML = `<i class="fas fa-truck me-1"></i> Estimasi pengiriman 15-30 menit tergantung jarak lokasimu.`;
         }
     };
 
-    deliveryOptions.forEach(option => {
-        option.addEventListener('click', () => {
-            selectedDelivery = option.dataset.method;
-            updateDeliveryUI(selectedDelivery);
-        });
+    cardAmbil.addEventListener('click', () => {
+        selectedDelivery = 'pickup';
+        updateDeliveryUI('pickup');
     });
 
-    // --- INTERAKSI PEMILIHAN MOOD ---
+    cardDelivery.addEventListener('click', () => {
+        selectedDelivery = 'delivery';
+        updateDeliveryUI('delivery');
+    });
+
+    // --- 5. MOOD SELECTION & MODAL CONTROL ---
     moodCards.forEach(card => {
         card.addEventListener('click', () => {
-            // Bersihkan seleksi aktif mood lainnya
-            moodCards.forEach(c => c.classList.remove('active'));
-            
-            // Tambahkan status aktif pada elemen yang dipilih
-            card.classList.add('active');
             selectedMoodId = parseInt(card.dataset.moodId, 10);
+            const moodName = card.dataset.moodName;
+            const moodImg = card.dataset.moodImg;
+
+            // Highlight the selected card
+            moodCards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
+            // Set modal content and show it
+            modalMoodName.textContent = moodName;
+            modalIcon.src = moodImg;
+            modal.classList.add('show');
         });
     });
 
-    // --- VALIDASI DAN SUBMIT KE LOCALSTORAGE ---
-    submitBtn.addEventListener('click', () => {
+    const closeModal = () => {
+        modal.classList.remove('show');
+    };
+
+    btnCancel.addEventListener('click', closeModal);
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    // --- 6. VALIDATION & REDIRECT ---
+    btnConfirm.addEventListener('click', () => {
         const userName = nameInput.value.trim();
         const userAddress = addressInput.value.trim();
 
-        // 1. Validasi Nama
+        // 1. Validate Name
         if (!userName) {
             alert('Mohon masukkan nama panggilan Anda terlebih dahulu.');
+            closeModal();
             nameInput.focus();
             return;
         }
 
-        // 2. Validasi Alamat (Jika metode delivery terpilih)
+        // 2. Validate Address if Delivery is selected
         if (selectedDelivery === 'delivery' && !userAddress) {
             alert('Silakan isi detail alamat pengiriman Anda.');
+            closeModal();
             addressInput.focus();
             return;
         }
 
-        // 3. Validasi Pilihan Mood
-        if (!selectedMoodId) {
-            alert('Silakan pilih salah satu suasana hatimu saat ini.');
-            return;
-        }
-
-        // --- PROSES MENYIMPAN DATA ---
-        // Menyimpan status state ke localStorage sebelum berganti halaman
+        // 3. Save Data to localStorage
         localStorage.setItem('user_name', userName);
         localStorage.setItem('delivery_method', selectedDelivery);
         localStorage.setItem('user_address', selectedDelivery === 'delivery' ? userAddress : '');
         localStorage.setItem('selected_mood', selectedMoodId);
 
-        console.log("Data identitas berhasil disimpan ke client-side storage.");
+        console.log("Session saved successfully. Redirecting to menu recommendations...");
 
-        // Pengalihan halaman secara mulus (smooth client routing)
+        // Redirect to menu page
         window.location.href = 'menu.html';
     });
 
-    // Jalankan pengecekan data awal saat halaman selesai dimuat
+    // Run initial data check
     checkExistingData();
 });

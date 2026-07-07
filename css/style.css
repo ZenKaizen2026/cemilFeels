@@ -176,6 +176,11 @@ input[type="text"]:focus, textarea:focus {
     align-items: center;
 }
 
+.mood-card.active {
+    border-color: var(--primary) !important;
+    background-color: #FFF3E0 !important;
+}
+
 .mood-card:hover {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
     border-color: var(--primary);

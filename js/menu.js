@@ -2,20 +2,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. DATA MASTER MAKANAN (Rekomendasi Berdasarkan Mood ID) ---
     const menuDatabase = {
         1: [ // Stress / Marah (Opsi Rasa Kuat & Pedas)
-            { name: "Bakso Mercon Membara", price: 25000, img: "https://images.unsplash.com/photo-1581333100576-b73b036139f4?q=80&w=600&auto=format&fit=crop" },
-            { name: "Ceker Setan Melotot", price: 18000, img: "https://images.unsplash.com/photo-1626132647523-66f5bf380027?q=80&w=600&auto=format&fit=crop" }
+            { name: "Bakso Goreng Stick", price: 25000, img: "/img/basrengstik.jpeg" },
+            { name: "Kulpi Balado", price: 18000, img: "/img/kulpi balado.jpeg" }
         ],
         2: [ // Sedih / Galau (Rasa Nyaman & Manis)
-            { name: "Indomie Kuah Keju Creamy", price: 15000, img: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=600&auto=format&fit=crop" },
-            { name: "Pisang Goreng Caramel Melt", price: 17000, img: "https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=600&auto=format&fit=crop" }
+            { name: "Bola-Bola Coklat Creamy", price: 15000, img: "/img/bola bola coklat.jpeg" },
+            { name: "Pisang Goreng Caramel Melt", price: 17000, img: "/img/piscok lumer coklat.jpeg" }
         ],
         3: [ // Gabut / Bosan (Camilan Ringan)
-            { name: "Cireng Salju Bumbu Rujak", price: 14000, img: "https://images.unsplash.com/photo-1624371414361-e6e229c11e5a?q=80&w=600&auto=format&fit=crop" },
-            { name: "Cilor Maklor Gurih Rempah", price: 12000, img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=600&auto=format&fit=crop" }
+            { name: "Makaroni Bantet", price: 14000, img: "/img/makaroni bantet.jpeg" },
+            { name: "Pangsit", price: 12000, img: "/img/krupuk pangsit.jpeg" }
         ],
         4: [ // Happy / Lapar (Sajian Kenyang)
-            { name: "Ayam Geprek Sambal Korek", price: 22000, img: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=600&auto=format&fit=crop" },
-            { name: "Roti Bakar Double Chocolate", price: 20000, img: "https://images.unsplash.com/photo-1584776296944-ab6fb57b0bdd?q=80&w=600&auto=format&fit=crop" }
+            { name: "Tahu Walik", price: 22000, img: "/img/tahu walik.jpeg" },
+            { name: "Cireng Sambal Rujak", price: 20000, img: "/img/cireng sambal rujak.jpeg" }
         ]
     };
 
@@ -48,12 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Proteksi Rute: Jika data nama/mood kosong, kembalikan ke halaman mood
     if (!moodId || isNaN(moodId)) {
         alert("Sesi tidak valid. Silakan tentukan nama dan perasaanmu terlebih dahulu.");
-        window.location.href = 'mood.html';
+        window.location.href = 'moodtiosaurus.html';
         return;
     }
 
     // --- 4. RENDER ELEMENT DINAMIS ---
-    greetingText.innerHTML = `Halo **${userName}**, menu terbaik untuk suasana hatimu yang sedang **${moodNames[moodId]}** :`;
+    greetingText.innerHTML = `Halo <strong>${userName}</strong>, menu terbaik untuk suasana hatimu yang sedang <strong>${moodNames[moodId]}</strong> :`;
 
     const renderFoodMenu = () => {
         const recommendations = menuDatabase[moodId] || [];
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 7. TOMBOL NAVIGASI & VALIDASI AKHIR ---
     btnBack.addEventListener('click', () => {
-        window.location.href = 'mood.html';
+        window.location.href = 'moodtiosaurus.html';
     });
 
     btnNext.addEventListener('click', () => {
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         console.log("Data menu telah dikonfigurasi & disimpan.");
-        window.location.href = 'cart.html';
+        window.location.href = 'detail.html';
     });
 
     // Inisialisasi awal halaman
