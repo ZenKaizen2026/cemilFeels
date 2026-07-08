@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cemil Feels - Ekspresikan Perasaanmu</title>
+    
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Memuat Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff7ed', 100: '#ffedd5', 200: '#fed7aa',
+                            300: '#fdba74', 400: '#fb923c', 500: '#f97316',
+                            600: '#ea580c', 700: '#c2410c',
+                        },
+                        mood: {
+                            marah: '#fef2f2', marahDark: '#ef4444',
+                            sedih: '#eff6ff', sedihDark: '#3b82f6',
+                            bosan: '#f3f4f6', bosanDark: '#6b7280',
+                            senang: '#fff7ed', senangDark: '#f97316'
+                        },
+                        wa: {
+                            500: '#25D366', 600: '#128C7E'
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(0,0,0,0.05)',
+                        'glow': '0 0 20px rgba(249, 115, 22, 0.15)',
+                        'glass': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass-panel {
+                @apply bg-white/90 backdrop-blur-xl border border-white/60 shadow-glass;
+            }
+        }
+
+        /* Styling dasar scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { @apply bg-slate-200 rounded-full hover:bg-slate-300; }
+
+        /* Animasi masuk Form Alamat */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); height: 0; }
+            to { opacity: 1; transform: translateY(0); height: auto; }
+        }
+        #addressContainer { display: none; }
+        #addressContainer.show { display: block; animation: slideDown 0.3s ease-out forwards; }
+
+        /* Style Order Card */
+        .order-card { @apply border-2 border-slate-100 bg-white transition-all duration-300 ease-out; }
+        .order-card:hover { @apply border-brand-200 bg-brand-50/30; }
+        .order-card.active { @apply border-brand-500 bg-brand-50/50 shadow-glow scale-[1.02]; }
+        .order-card.active .card-icon { @apply text-brand-500 bg-brand-100; }
+        .order-card.active h3 { @apply text-brand-600; }
+
+        /* Style Modal Pop-up Umum */
+        .modal-overlay {
+            @apply opacity-0 pointer-events-none backdrop-blur-sm bg-slate-900/40;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .modal-overlay.show { @apply opacity-100 pointer-events-auto; }
+        .modal-content {
+            @apply translate-y-8 scale-95 opacity-0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-overlay.show .modal-content { @apply translate-y-0 scale-100 opacity-100; }
+
+        /* Ribbon Level Pedas */
+        .ribbon-wrapper { @apply absolute -top-1 -right-1 w-24 h-24 overflow-hidden rounded-tr-[1.5rem] z-20 pointer-events-none; }
+        .ribbon { @apply absolute top-5 -right-7 w-32 bg-red-600 text-white text-center text-[10px] font-extrabold py-1 shadow-md uppercase tracking-wider transform rotate-45 transition-transform duration-300; }
+
+        /* Transisi Body Background */
+        body {
+            transition: background-color 0.8s ease;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(28,100%,74%,0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(28,100%,74%,0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* --- ANIMASI POP-UP SAAT SCROLL --- */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    </style>
+</head>
+<body id="app-body" class="text-slate-700 antialiased selection:bg-brand-200 selection:text-brand-800 bg-mood-marah overflow-x-hidden">
+
+    <!-- ================= SECTION 1: LANDING PAGE ================= -->
+    <section id="landing-section" class="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-8 relative z-10 py-12">
+        <div class="w-full max-w-3xl flex flex-col gap-6 relative reveal-on-scroll is-visible"> <!-- is-visible by default on load -->
+            
+            <!-- Header Landing -->
+            <header class="text-center mb-4">
+                <div class="inline-flex items-center justify-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm border border-slate-100 mb-6">
+                    <img src="../img/CEMILAJA.png" alt="CemilFeels Logo" class="w-10 h-10 object-contain" onerror="this.src='https://placehold.co/40x40/f97316/ffffff?text=CF'">
+                    <span class="font-display font-bold text-xl tracking-tight text-slate-800">Cemil<span class="text-brand-500">Feels</span></span>
+                </div>
+                <h1 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-3">
+                    Ekspresikan perasaanmu hari ini ✨
+                </h1>
+                <p class="text-slate-500">Pilih cemilan yang paling pas dengan *mood* kamu saat ini.</p>
+            </header>
+
+            <!-- Card Utama Landing -->
+            <div class="glass-panel rounded-[2.5rem] p-6 sm:p-10 relative overflow-hidden shadow-2xl">
+                <!-- Dekorasi blur -->
+                <div class="absolute -top-20 -right-20 w-40 h-40 bg-brand-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+                <!-- Input Nama -->
+                <div class="mb-10 relative z-10">
+                    <label class="font-display font-semibold text-slate-800 mb-3 flex items-center gap-2 text-lg" for="userName">
+                        <i data-lucide="user" class="w-5 h-5 text-brand-500"></i> Siapa namamu?
+                    </label>
+                    <div class="relative">
+                        <input type="text" id="userName" placeholder="Ketik namamu di sini..." 
+                            class="w-full pl-5 pr-4 py-4 rounded-2xl border border-slate-200 text-slate-800 placeholder-slate-400 bg-slate-50/50 hover:bg-white focus:bg-white focus:outline-none focus:border-brand-400 focus:ring-4 focus:ring-brand-500/10 transition-all duration-300">
+                    </div>
+                </div>
+
+                <!-- Pilihan Delivery/Ambil -->
+                <div class="mb-12 relative z-10">
+                    <p class="font-display font-semibold text-slate-800 mb-4 flex items-center gap-2 text-lg">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-brand-500"></i> Mau diantar atau ambil sendiri?
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button class="order-card active rounded-2xl p-5 text-left group flex gap-4 items-start focus:outline-none" id="cardAmbil" onclick="setOrderType('ambil')">
+                            <div class="card-icon p-3 rounded-xl bg-slate-100 text-slate-500 transition-colors duration-300 flex-shrink-0">
+                                <i data-lucide="store" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-bold text-slate-800 mb-1 text-lg">Ambil Sendiri</h3>
+                                <p class="text-sm text-slate-500 leading-relaxed">Ambil langsung di Outlet Pusat. Cepat & bebas ongkir.</p>
+                            </div>
+                        </button>
+                        
+                        <button class="order-card rounded-2xl p-5 text-left group flex gap-4 items-start focus:outline-none" id="cardDelivery" onclick="setOrderType('delivery')">
+                            <div class="card-icon p-3 rounded-xl bg-slate-100 text-slate-500 transition-colors duration-300 flex-shrink-0">
+                                <i data-lucide="bike" class="w-6 h-6"></i>
+                            </div>
+                            <div class="w-full">
+                                <h3 class="font-display font-bold text-slate-800 mb-1 text-lg">Delivery</h3>
+                                <p id="deliveryText" class="text-sm text-slate-500 leading-relaxed block">Diantar dalam 15-30 menit ke lokasimu.</p>
+                                <div id="addressContainer" class="w-full mt-4 w-full">
+                                    <textarea id="userAddress" placeholder="Tulis alamat lengkap pengirimanmu..." 
+                                        class="w-full p-3 rounded-xl border border-slate-200 text-slate-800 placeholder-slate-400 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-400 focus:ring-4 focus:ring-brand-500/10 transition-all duration-300 min-h-[100px] resize-none text-sm"></textarea>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pilihan Mood -->
+                <div class="relative z-10">
+                    <p class="font-display font-semibold text-slate-800 mb-5 flex items-center gap-2 text-lg">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-brand-500"></i> Lagi merasa apa sekarang?
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <button class="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-red-500/10 hover:border-red-200 group focus:outline-none focus:ring-4 focus:ring-red-500/20" 
+                            onclick="openMoodPopup('marah', 'Marah', '../img/marah.png', 'text-red-500', 'bg-red-50')">
+                            <div class="w-20 h-20 rounded-full bg-slate-50 group-hover:bg-red-50 transition-colors duration-300 flex items-center justify-center">
+                                <img src="../img/marah.png" alt="Marah" class="w-40 h-40 object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-sm">
+                            </div>
+                            <span class="font-display font-bold text-slate-700 tracking-wide text-sm uppercase">Marah</span>
+                        </button>
+
+                        <button class="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10 hover:border-blue-200 group focus:outline-none focus:ring-4 focus:ring-blue-500/20" 
+                            onclick="openMoodPopup('sedih', 'Sedih', '../img/sad (2).png', 'text-blue-500', 'bg-blue-50')">
+                            <div class="w-20 h-20 rounded-full bg-slate-50 group-hover:bg-blue-50 transition-colors duration-300 flex items-center justify-center">
+                                <img src="../img/sad (2).png" alt="Sedih" class="w-40 h-40 object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-sm">
+                            </div>
+                            <span class="font-display font-bold text-slate-700 tracking-wide text-sm uppercase">Sedih</span>
+                        </button>
+
+                        <button class="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-500/10 hover:border-slate-200 group focus:outline-none focus:ring-4 focus:ring-slate-500/20" 
+                            onclick="openMoodPopup('bosan', 'Bosan', '../img/boring.png', 'text-slate-600', 'bg-slate-100')">
+                            <div class="w-20 h-20 rounded-full bg-slate-50 group-hover:bg-slate-100 transition-colors duration-300 flex items-center justify-center">
+                                <img src="../img/boring.png" alt="Bosan" class="w-40 h-40 object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-sm">
+                            </div>
+                            <span class="font-display font-bold text-slate-700 tracking-wide text-sm uppercase">Bosan</span>
+                        </button>
+
+                        <button class="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand-500/10 hover:border-brand-200 group focus:outline-none focus:ring-4 focus:ring-brand-500/20" 
+                            onclick="openMoodPopup('senang', 'Senang', '../img/happy (2).png', 'text-brand-500', 'bg-brand-50')">
+                            <div class="w-20 h-20 rounded-full bg-slate-50 group-hover:bg-brand-50 transition-colors duration-300 flex items-center justify-center">
+                                <img src="../img/happy (2).png" alt="Senang" class="w-40 h-40 object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-sm">
+                            </div>
+                            <span class="font-display font-bold text-slate-700 tracking-wide text-sm uppercase">Senang</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="flex justify-center mt-4 opacity-50 animate-bounce cursor-pointer" onclick="document.getElementById('menu-section').scrollIntoView({ behavior: 'smooth' });">
+                <i data-lucide="chevron-down" class="w-6 h-6 text-slate-500"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SECTION 2: MENU PANEL ================= -->
+    <section id="menu-section" class="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-8 relative z-20 py-12 hidden">
+        
+        <!-- Container Menu -->
+        <div class="glass-panel w-full max-w-4xl h-[85vh] sm:h-[80vh] rounded-[2.5rem] p-6 sm:p-8 flex flex-col relative overflow-hidden shadow-2xl reveal-on-scroll">
+            
+            <!-- Header Menu & Navigasi -->
+            <header class="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 mb-6 shrink-0 relative z-20 w-full border-b border-slate-100/50 pb-4">
+                
+                <!-- Area Kiri: Teks Judul dan Subtitle Bertumpuk (Flex-col) -->
+                <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
+                    <h1 id="header-title" class="font-extrabold text-2xl sm:text-3xl tracking-tight transition-colors duration-300">
+                        Menu Marah
+                    </h1>
+                    <p id="header-subtitle-container" class="font-medium text-sm sm:text-base mt-1 transition-colors duration-300">
+                        Subtitle
+                    </p>
+                </div>
+
+                <!-- Area Kanan: Navigasi Mood Pill -->
+                <div class="flex justify-center sm:justify-end mt-4 sm:mt-0">
+                    <nav class="bg-slate-200/70 p-1.5 rounded-[2.5rem] flex items-center gap-2 shadow-inner border border-white/50 backdrop-blur-md">
+                        <button onclick="changeMood('sedih')" id="btn-mood-sedih" title="Sedih" class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none">
+                            <img src="../img/sad (2).png" alt="Sedih" class="w-12 h-12 object-contain">
+                        </button>
+                        <button onclick="changeMood('senang')" id="btn-mood-senang" title="Senang" class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none">
+                            <img src="../img/happy (2).png" alt="Senang" class="w-12 h-12 object-contain">
+                        </button>
+                        <button onclick="changeMood('bosan')" id="btn-mood-bosan" title="Bosan" class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none">
+                            <img src="../img/boring.png" alt="Bosan" class="w-12 h-12 object-contain">
+                        </button>
+                        <button onclick="changeMood('marah')" id="btn-mood-marah" title="Marah" class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none">
+                            <img src="../img/marah.png" alt="Marah" class="w-12 h-12 object-contain">
+                        </button>
+                    </nav>
+                </div>
+            </header>
+
+            <!-- Area Scroll Utama (Konten Menu) -->
+            <main id="main-scroll-area" class="flex-1 overflow-y-auto custom-scrollbar pr-2 sm:pr-4 pb-24 relative z-10">
+                <!-- Grid Makanan 2x2 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8" id="food-grid"></div>
+
+                <!-- Section Tambah Minuman -->
+                <div class="mb-6 mt-2 flex items-center gap-3">
+                    <div class="h-px bg-slate-200 flex-1"></div>
+                    <h2 class="font-bold text-slate-400 text-sm uppercase tracking-widest text-center">Tambah Minuman?</h2>
+                    <div class="h-px bg-slate-200 flex-1"></div>
+                </div>
+                
+                <!-- Grid Minuman 2x2 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" id="drink-grid"></div>
+            </main>
+
+            <!-- Sticky Footer -->
+            <div class="absolute bottom-0 left-0 right-0 h-[88px] bg-white/90 backdrop-blur-md border-t border-slate-100 flex items-center justify-between px-6 sm:px-8 z-30 rounded-b-[2.5rem]">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-0.5">Total Pesanan</p>
+                    <p class="text-2xl font-display font-extrabold text-slate-900" id="total-price">Rp 0</p>
+                </div>
+                <button onclick="proceedToCart()" class="bg-slate-900 text-white px-6 sm:px-8 py-3.5 rounded-2xl font-bold hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/20 flex items-center gap-3 focus:outline-none active:scale-95">
+                    Lanjut <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SECTION 3: KERANJANG ================= -->
+    <section id="cart-section" class="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-8 relative z-30 py-12 hidden">
+        <main class="glass-panel w-full max-w-[420px] rounded-[2.5rem] p-6 sm:p-8 relative overflow-hidden flex flex-col gap-6 shadow-2xl reveal-on-scroll">
+            
+            <!-- Header Keranjang -->
+            <header class="text-center mt-2 mb-2">
+                <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 mb-1">
+                    Detail Keranjang
+                </h1>
+                <p class="font-medium text-brand-500 text-sm sm:text-base">
+                    Tinjau kembali pesanan Anda ✨
+                </p>
+            </header>
+
+            <!-- Box Info Pengiriman -->
+            <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5">
+                <h2 class="font-display font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="circle-user" class="w-5 h-5 text-slate-700"></i> Info Pengiriman
+                </h2>
+                <div class="flex flex-col gap-3 text-sm">
+                    <div class="flex justify-between items-center gap-4">
+                        <span class="text-slate-500">Nama:</span>
+                        <span class="font-bold text-slate-800 text-right" id="cart-name">...</span>
+                    </div>
+                    <div class="flex justify-between items-center gap-4">
+                        <span class="text-slate-500">Metode:</span>
+                        <span class="font-bold text-slate-800 text-right" id="cart-method">...</span>
+                    </div>
+                    <div class="flex justify-between items-center gap-4">
+                        <span class="text-slate-500">Mood:</span>
+                        <span class="font-bold text-slate-800 text-right uppercase flex gap-2 items-center justify-end" id="cart-mood">...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rincian Item (Tabel) -->
+            <div class="flex flex-col gap-4 mt-2" id="cart-items-container">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Item</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Harga</span>
+                </div>
+                <div id="cart-items-list" class="flex flex-col gap-3">
+                    <!-- Items injected via JS -->
+                </div>
+            </div>
+
+            <!-- Box Subtotal & Total -->
+            <div class="bg-brand-50/70 border border-brand-100 rounded-2xl p-5 mt-2 flex flex-col gap-3">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-medium text-slate-500">Subtotal Menu</span>
+                    <span class="text-sm font-bold text-slate-800" id="cart-subtotal">Rp 0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-medium text-slate-500">Ongkos Kirim</span>
+                    <span class="text-sm font-bold text-slate-800" id="cart-ongkir">Rp 0</span>
+                </div>
+                <div class="flex justify-between items-center mt-2">
+                    <span class="text-lg font-display font-extrabold text-slate-900">Total Bayar</span>
+                    <span class="text-xl font-extrabold text-brand-500" id="cart-total">Rp 0</span>
+                </div>
+            </div>
+
+            <!-- Tombol Aksi -->
+            <div class="flex flex-col gap-3 mt-2 mb-2">
+                <button onclick="sendToWA()" class="w-full bg-wa-500 hover:bg-wa-600 text-white py-4 px-6 rounded-2xl font-bold tracking-wide transition-all duration-300 shadow-lg shadow-wa-500/30 flex items-center justify-center gap-2 focus:outline-none active:scale-95">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i> Kirim Pesanan ke WA
+                </button>
+                <button onclick="backToMenu()" class="w-full py-3 text-slate-500 text-sm font-semibold hover:text-slate-800 transition-colors flex items-center justify-center gap-2 focus:outline-none rounded-xl">
+                    <i data-lucide="file-edit" class="w-4 h-4"></i> Ubah Pilihan Menu
+                </button>
+            </div>
+        </main>
+    </section>
+
+    <!-- ================= MODALS ================= -->
+    
+    <!-- 1. MODAL NOTIFIKASI MOOD -->
+    <div class="modal-overlay fixed inset-0 w-full h-full z-[100] flex justify-center items-center p-4" id="moodModal">
+        <div class="modal-content bg-white p-8 sm:p-10 rounded-[2rem] text-center max-w-[400px] w-full shadow-2xl flex flex-col items-center gap-6 border border-slate-100 relative">
+            <button onclick="closeMoodPopup()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 bg-slate-50 hover:bg-slate-100 p-2 rounded-full transition-colors focus:outline-none">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="modalIconContainer" class="p-6 rounded-full w-32 h-32 flex items-center justify-center transition-colors duration-300">
+                <img id="modalIcon" src="" alt="Mood Icon" class="w-20 h-20 object-contain drop-shadow-md transition-transform hover:scale-105 duration-300">
+            </div>
+            <div>
+                <h3 class="font-display text-2xl font-bold text-slate-900 tracking-tight mb-2">Lagi <span id="modalMoodName" class="text-brand-500">...</span> ya?</h3>
+                <p class="text-slate-500 text-sm">Tenang, kami punya rekomendasi cemilan yang cocok banget buat nemenin perasaanmu saat ini.</p>
+            </div>
+            <div class="w-full flex flex-col gap-3 mt-2">
+                <button onclick="proceedToMenu()" class="w-full bg-brand-500 text-white border-none py-4 px-6 rounded-xl font-bold tracking-wide cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 hover:bg-brand-600 hover:shadow-lg hover:shadow-brand-500/30 active:scale-95">
+                    Lihat Rekomendasi Menu <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+                <button onclick="closeMoodPopup()" class="bg-transparent border-none text-slate-500 text-sm font-semibold cursor-pointer py-3 transition-colors hover:text-slate-800 rounded-xl">
+                    Nanti Saja
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. MODAL LEVEL PEDAS -->
+    <div id="spice-modal" class="modal-overlay fixed inset-0 w-full h-full z-[110] flex items-center justify-center p-4">
+        <div class="modal-content bg-white w-full max-w-sm rounded-[2rem] p-6 shadow-2xl relative" id="spice-modal-content">
+            <div class="text-center mb-6 mt-4">
+                <div class="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="flame" class="w-8 h-8"></i>
+                </div>
+                <h3 class="font-display font-extrabold text-xl text-slate-900" id="modal-food-name">Nama Makanan</h3>
+                <p class="text-sm text-slate-500 mt-1">Atur tingkat kepedasan pesananmu</p>
+            </div>
+            <div class="flex items-center justify-between bg-slate-50 border border-slate-200 p-4 rounded-2xl mb-6">
+                <button onclick="changeModalSpiceLevel(-1)" class="w-10 h-10 bg-white rounded-xl text-slate-600 shadow-sm flex items-center justify-center hover:bg-slate-100">
+                    <i data-lucide="minus" class="w-5 h-5"></i>
+                </button>
+                <div class="text-center">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Level</p>
+                    <p class="text-3xl font-display font-extrabold text-red-500" id="modal-spice-level">1</p>
+                </div>
+                <button onclick="changeModalSpiceLevel(1)" class="w-10 h-10 bg-white rounded-xl text-slate-600 shadow-sm flex items-center justify-center hover:bg-slate-100">
+                    <i data-lucide="plus" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <button onclick="confirmSpiceLevel()" class="w-full bg-red-500 text-white font-bold py-4 rounded-xl hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30">
+                Konfirmasi Pesanan
+            </button>
+            <button onclick="closeSpiceModal()" class="w-full mt-2 py-3 text-slate-500 font-semibold hover:text-slate-800 transition-colors">
+                Batal
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+        lucide.createIcons();
+
+        // --- GLOBAL STATE ---
+        const appState = {
+            userName: '',
+            orderType: 'ambil',
+            address: '',
+            mood: 'marah',
+            pendingMood: null,
+            selectedFoodIds: new Set(),
+            selectedDrinkIds: new Set(),
+            foodSpiceHistory: {} // Menyimpan level pedas tiap menu
+        };
+
+        // --- DATABASE ---
+        const db = {
+            marah: {
+                themeColor: 'text-red-500', subtitleColor: 'text-red-400', bgColor: 'bg-mood-marah', pillColor: 'bg-red-100',
+                title: 'Untuk Kamu yang Lagi Kesel', subtitle: 'Menu pedas buat redain emosimu', img: '../img/marah.png',
+                foods: [
+                    { id: 'm1', name: 'Bakso Mercon', price: 25000, img: 'https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=500&h=400&fit=crop' },
+                    { id: 'm2', name: 'Ceker Setan', price: 18000, img: 'https://images.unsplash.com/photo-1564834724105-918b73d1b9e0?w=500&h=400&fit=crop' },
+                    { id: 'm3', name: 'Mie Judes Dewa', price: 20000, img: 'https://images.unsplash.com/photo-1552611052-33e04de081de?w=500&h=400&fit=crop' },
+                    { id: 'm4', name: 'Geprek Emosi', price: 22000, img: 'https://images.unsplash.com/photo-1626804475297-41609ea004eb?w=500&h=400&fit=crop' }
+                ],
+                drinks: [
+                    { id: 'md1', name: 'Es Teh Jumbo', price: 7000 }, { id: 'md2', name: 'Es Jeruk', price: 8000 },
+                    { id: 'md3', name: 'Es Kopi Kuat', price: 15000 }, { id: 'md4', name: 'Air Es', price: 5000 }
+                ]
+            },
+            sedih: {
+                themeColor: 'text-blue-500', subtitleColor: 'text-blue-400', bgColor: 'bg-mood-sedih', pillColor: 'bg-blue-100',
+                title: 'Untuk Kamu yang Lagi Sedih', subtitle: 'Pilih menu yang cocok buat mood kamu', img: '../img/sad (2).png',
+                foods: [
+                    { id: 's1', name: 'Sop Iga Hangat', price: 45000, img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&h=400&fit=crop' },
+                    { id: 's2', name: 'Bubur Ayam', price: 15000, img: 'https://images.unsplash.com/photo-1512058454905-6b841e7ad132?w=500&h=400&fit=crop' },
+                    { id: 's3', name: 'Lava Cake', price: 25000, img: 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=500&h=400&fit=crop' },
+                    { id: 's4', name: 'Indomie Telur', price: 12000, img: 'https://images.unsplash.com/photo-1612929633738-8fe01f7280c2?w=500&h=400&fit=crop' }
+                ],
+                drinks: [
+                    { id: 'sd1', name: 'Teh Chamomile', price: 12000 }, { id: 'sd2', name: 'Hot Choco', price: 18000 },
+                    { id: 'sd3', name: 'Wedang Jahe', price: 10000 }, { id: 'sd4', name: 'Air Hangat', price: 5000 }
+                ]
+            },
+            bosan: {
+                themeColor: 'text-gray-500', subtitleColor: 'text-gray-400', bgColor: 'bg-mood-bosan', pillColor: 'bg-gray-200',
+                title: 'Untuk Kamu yang Lagi Bosen', subtitle: 'Menu seru buat ngusir bosanmu', img: '../img/boring.png',
+                foods: [
+                    { id: 'b1', name: 'Seblak Campur', price: 15000, img: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&h=400&fit=crop' },
+                    { id: 'b2', name: 'Dimsum Mentai', price: 25000, img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&h=400&fit=crop' },
+                    { id: 'b3', name: 'Tteokbokki', price: 30000, img: 'https://images.unsplash.com/photo-1580651315530-69c8e0026377?w=500&h=400&fit=crop' },
+                    { id: 'b4', name: 'French Fries', price: 18000, img: 'https://images.unsplash.com/photo-1576107232684-1279f390859f?w=500&h=400&fit=crop' }
+                ],
+                drinks: [
+                    { id: 'bd1', name: 'Boba Brown Sugar', price: 20000 }, { id: 'bd2', name: 'Kopi Susu Aren', price: 18000 },
+                    { id: 'bd3', name: 'Taro Milkshake', price: 22000 }, { id: 'bd4', name: 'Matcha Latte', price: 24000 }
+                ]
+            },
+            senang: {
+                themeColor: 'text-orange-500', subtitleColor: 'text-orange-400', bgColor: 'bg-mood-senang', pillColor: 'bg-orange-100',
+                title: 'Untuk Kamu yang Lagi Senang', subtitle: 'Menu spesial buat rayain mood baikmu', img: '../img/happy (2).png',
+                foods: [
+                    { id: 'h1', name: 'Sweet Croffle', price: 28000, img: 'https://images.unsplash.com/photo-1627308595229-7830f5c9c66e?w=500&h=400&fit=crop' },
+                    { id: 'h2', name: 'Pizza Party', price: 65000, img: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&h=400&fit=crop' },
+                    { id: 'h3', name: 'Sushi Roll', price: 85000, img: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=500&h=400&fit=crop' },
+                    { id: 'h4', name: 'Donut Pink', price: 15000, img: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=500&h=400&fit=crop' }
+                ],
+                drinks: [
+                    { id: 'hd1', name: 'Strawberry Smooth', price: 25000 }, { id: 'hd2', name: 'Mocktail Blue', price: 28000 },
+                    { id: 'hd3', name: 'Ice Cream Float', price: 20000 }, { id: 'hd4', name: 'Jus Mangga', price: 15000 }
+                ]
+            }
+        };
+
+        // Utility
+        function formatRp(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+        }
+
+        // --- ANIMASI INTERSECTION OBSERVER ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Mulai observasi semua elemen yang punya class 'reveal-on-scroll'
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+        // --- SECTION 1: LANDING LOGIC ---
+        function setOrderType(type) {
+            appState.orderType = type;
+            const cardAmbil = document.getElementById('cardAmbil');
+            const cardDelivery = document.getElementById('cardDelivery');
+            const addressContainer = document.getElementById('addressContainer');
+            const deliveryText = document.getElementById('deliveryText');
+
+            if (type === 'ambil') {
+                cardAmbil.classList.add('active');
+                cardDelivery.classList.remove('active');
+                addressContainer.classList.remove('show');
+                deliveryText.style.display = 'block';
+            } else {
+                cardDelivery.classList.add('active');
+                cardAmbil.classList.remove('active');
+                addressContainer.classList.add('show');
+                deliveryText.style.display = 'none';
+            }
+        }
+
+        const moodModal = document.getElementById('moodModal');
+        function openMoodPopup(moodId, moodName, imageSrc, iconColorClass, bgColorClass) {
+            appState.pendingMood = moodId;
+            document.getElementById('modalMoodName').innerText = moodName;
+            document.getElementById('modalMoodName').className = iconColorClass;
+            document.getElementById('modalIconContainer').className = 'p-6 rounded-full w-32 h-32 flex items-center justify-center transition-colors duration-300 ' + bgColorClass;
+            document.getElementById('modalIcon').src = imageSrc;
+            moodModal.classList.add('show');
+        }
+
+        function closeMoodPopup() {
+            moodModal.classList.remove('show');
+        }
+
+        function proceedToMenu() {
+            closeMoodPopup();
+            // Save user info
+            appState.userName = document.getElementById('userName').value.trim() || 'Sobat Cemil';
+            appState.address = document.getElementById('userAddress').value.trim();
+            
+            // Set Mood & Show Menu
+            changeMood(appState.pendingMood);
+            
+            // Remove hidden to allow Intersection Observer to trigger animation
+            const menuSection = document.getElementById('menu-section');
+            menuSection.classList.remove('hidden');
+            
+            // Give a tiny delay for display:none to clear before scrolling
+            setTimeout(() => {
+                menuSection.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        // --- SECTION 2: MENU LOGIC ---
+        function renderMenuUI() {
+            const data = db[appState.mood];
+            
+            // Background update
+            document.getElementById('app-body').className = `text-slate-800 min-h-screen p-4 antialiased transition-colors duration-700 overflow-x-hidden ${data.bgColor}`;
+            
+            // Text Update
+            document.getElementById('header-title').innerText = data.title;
+            document.getElementById('header-title').className = `font-extrabold text-2xl sm:text-3xl tracking-tight transition-colors duration-300 ${data.themeColor}`;
+            document.getElementById('header-subtitle-container').innerText = data.subtitle;
+            document.getElementById('header-subtitle-container').className = `font-medium text-sm sm:text-base mt-1 transition-colors duration-300 ${data.subtitleColor}`;
+
+            // Navigasi Pill
+            const moodList = ['sedih', 'senang', 'bosan', 'marah'];
+            const baseBtnClass = "w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none";
+            
+            moodList.forEach(m => {
+                const btn = document.getElementById(`btn-mood-${m}`);
+                if (m === appState.mood) {
+                    btn.className = `${baseBtnClass} ${db[m].pillColor} shadow-md scale-110 ring-2 ring-white border border-white/50 z-10 relative`;
+                } else {
+                    btn.className = `${baseBtnClass} bg-transparent grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:scale-105 relative z-0`;
+                }
+            });
+
+            // Render Makanan
+            const foodGrid = document.getElementById('food-grid');
+            foodGrid.innerHTML = '';
+            data.foods.forEach(food => {
+                const isSelected = appState.selectedFoodIds.has(food.id);
+                const spiceLevel = appState.foodSpiceHistory[food.id];
+                const card = document.createElement('div');
+                card.className = `bg-white rounded-[1.5rem] p-3 border-2 cursor-pointer transition-all duration-300 hover:shadow-md flex items-center gap-4 relative overflow-hidden group ${isSelected ? 'border-slate-800 shadow-md' : 'border-slate-100 hover:border-slate-300'}`;
+                card.onclick = () => handleFoodClick(food);
+
+                let ribbonHTML = spiceLevel ? `<div class="ribbon-wrapper"><div class="ribbon bg-red-600">LVL ${spiceLevel}</div></div>` : '';
+
+                card.innerHTML = `
+                    ${ribbonHTML}
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 relative">
+                        <img src="${food.img}" alt="${food.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        ${isSelected ? '<div class="absolute inset-0 bg-slate-900/20 flex items-center justify-center"><div class="w-6 h-6 bg-white rounded-full flex items-center justify-center text-slate-900"><i data-lucide="check" class="w-4 h-4"></i></div></div>' : ''}
+                    </div>
+                    <div class="flex-1 pr-4">
+                        <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-tight mb-1">${food.name}</h3>
+                        <p class="font-extrabold ${data.themeColor} text-sm">${formatRp(food.price)}</p>
+                    </div>
+                `;
+                foodGrid.appendChild(card);
+            });
+
+            // Render Minuman
+            const drinkGrid = document.getElementById('drink-grid');
+            drinkGrid.innerHTML = '';
+            data.drinks.forEach(drink => {
+                const isSelected = appState.selectedDrinkIds.has(drink.id);
+                const card = document.createElement('div');
+                card.className = `bg-white p-4 rounded-[1.2rem] border-2 cursor-pointer transition-all duration-300 flex items-center justify-between ${isSelected ? 'border-slate-800 shadow-sm bg-slate-50' : 'border-slate-100 hover:border-slate-300'}`;
+                card.onclick = () => toggleDrink(drink.id);
+
+                card.innerHTML = `
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-sm mb-0.5">${drink.name}</h3>
+                        <p class="font-bold text-slate-500 text-xs">${formatRp(drink.price)}</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isSelected ? 'bg-slate-800 text-white rotate-45 transform' : 'bg-slate-100 text-slate-400'}">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                    </div>
+                `;
+                drinkGrid.appendChild(card);
+            });
+
+            lucide.createIcons();
+            calculateMenuTotal();
+        }
+
+        function changeMood(mood) {
+            if (appState.mood === mood && document.getElementById('menu-section').classList.contains('hidden') === false) return;
+            appState.mood = mood;
+            appState.selectedFoodIds.clear();
+            appState.selectedDrinkIds.clear();
+            renderMenuUI();
+            
+            const scrollArea = document.getElementById('main-scroll-area');
+            if(scrollArea) scrollArea.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleFoodClick(food) {
+            if (appState.mood === 'marah' && !appState.selectedFoodIds.has(food.id)) {
+                openSpiceModal(food);
+            } else {
+                if (appState.selectedFoodIds.has(food.id)) appState.selectedFoodIds.delete(food.id);
+                else appState.selectedFoodIds.add(food.id);
+                renderMenuUI();
+            }
+        }
+
+        function toggleDrink(id) {
+            if (appState.selectedDrinkIds.has(id)) appState.selectedDrinkIds.delete(id);
+            else appState.selectedDrinkIds.add(id);
+            renderMenuUI();
+        }
+
+        function calculateMenuTotal() {
+            let total = 0;
+            const data = db[appState.mood];
+            appState.selectedFoodIds.forEach(id => {
+                const item = data.foods.find(f => f.id === id);
+                if(item) total += item.price;
+            });
+            appState.selectedDrinkIds.forEach(id => {
+                const item = data.drinks.find(d => d.id === id);
+                if(item) total += item.price;
+            });
+            document.getElementById('total-price').innerText = formatRp(total);
+            return total;
+        }
+
+        // --- Spice Modal Logic ---
+        let activeSpiceFoodId = null;
+        let activeSpiceLevel = 1;
+        const spiceModal = document.getElementById('spice-modal');
+
+        function openSpiceModal(food) {
+            activeSpiceFoodId = food.id;
+            activeSpiceLevel = appState.foodSpiceHistory[food.id] || 1; 
+            document.getElementById('modal-food-name').innerText = food.name;
+            document.getElementById('modal-spice-level').innerText = activeSpiceLevel;
+            spiceModal.classList.add('show');
+        }
+
+        function closeSpiceModal() {
+            spiceModal.classList.remove('show');
+            activeSpiceFoodId = null;
+        }
+
+        function changeModalSpiceLevel(change) {
+            activeSpiceLevel += change;
+            if (activeSpiceLevel < 1) activeSpiceLevel = 1;
+            if (activeSpiceLevel > 5) activeSpiceLevel = 5;
+            document.getElementById('modal-spice-level').innerText = activeSpiceLevel;
+        }
+
+        function confirmSpiceLevel() {
+            if (activeSpiceFoodId) {
+                appState.foodSpiceHistory[activeSpiceFoodId] = activeSpiceLevel;
+                appState.selectedFoodIds.add(activeSpiceFoodId);
+                closeSpiceModal();
+                renderMenuUI(); 
+            }
+        }
+
+        // --- SECTION 3: CART LOGIC ---
+        function proceedToCart() {
+            if (appState.selectedFoodIds.size === 0 && appState.selectedDrinkIds.size === 0) {
+                alert("Ups! Pilih minimal satu menu dulu ya buat nemenin kamu.");
+                return;
+            }
+            
+            // Validasi Alamat
+            if (appState.orderType === 'delivery') {
+                appState.address = document.getElementById('userAddress').value.trim();
+                if (!appState.address) {
+                    alert("Alamat pengiriman belum diisi nih. Balik ke atas bentar ya!");
+                    document.getElementById('landing-section').scrollIntoView({ behavior: 'smooth' });
+                    return;
+                }
+            }
+
+            renderCartUI();
+            
+            // Tampilkan section dan biarkan observer mentrigger animasi masuk
+            const cartSection = document.getElementById('cart-section');
+            cartSection.classList.remove('hidden');
+            
+            setTimeout(() => {
+                cartSection.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function renderCartUI() {
+            // Update Info Customer
+            document.getElementById('cart-name').innerText = appState.userName;
+            
+            // Mengambil mood dari text kapital + gambar img mood dari db
+            const moodNameUC = appState.mood.charAt(0).toUpperCase() + appState.mood.slice(1);
+            document.getElementById('cart-mood').innerHTML = `${moodNameUC} <img src="${db[appState.mood].img}" class="w-5 h-5 object-contain">`;
+            
+            let methodStr = "Ambil Sendiri (Pickup)";
+            let ongkir = 0;
+            if (appState.orderType === 'delivery') {
+                methodStr = "Delivery ke: " + (appState.address.length > 15 ? appState.address.substring(0, 15) + '...' : appState.address);
+                ongkir = 10000;
+            }
+            document.getElementById('cart-method').innerText = methodStr;
+
+            // Update Tabel Items
+            const data = db[appState.mood];
+            const listContainer = document.getElementById('cart-items-list');
+            listContainer.innerHTML = '';
+            let subtotal = 0;
+
+            // Generate Foods
+            appState.selectedFoodIds.forEach(id => {
+                const item = data.foods.find(f => f.id === id);
+                if (item) {
+                    subtotal += item.price;
+                    let extraLabel = '';
+                    if (appState.mood === 'marah' && appState.foodSpiceHistory[id]) {
+                        extraLabel = ` <span class="text-xs text-red-500 bg-red-100 px-1.5 py-0.5 rounded font-bold ml-1">Lv.${appState.foodSpiceHistory[id]}</span>`;
+                    }
+                    
+                    listContainer.innerHTML += `
+                        <div class="flex justify-between items-center gap-4">
+                            <span class="font-bold text-slate-800 text-sm leading-tight flex-1">${item.name}${extraLabel}</span>
+                            <span class="font-bold text-slate-700 whitespace-nowrap">${formatRp(item.price)}</span>
+                        </div>
+                    `;
+                }
+            });
+
+            // Generate Drinks
+            appState.selectedDrinkIds.forEach(id => {
+                const item = data.drinks.find(d => d.id === id);
+                if (item) {
+                    subtotal += item.price;
+                    listContainer.innerHTML += `
+                        <div class="flex justify-between items-center gap-4">
+                            <span class="font-bold text-slate-800 text-sm leading-tight flex-1">${item.name}</span>
+                            <span class="font-bold text-slate-700 whitespace-nowrap">${formatRp(item.price)}</span>
+                        </div>
+                    `;
+                }
+            });
+
+            // Update Kalkulasi
+            document.getElementById('cart-subtotal').innerText = formatRp(subtotal);
+            document.getElementById('cart-ongkir').innerText = formatRp(ongkir);
+            document.getElementById('cart-total').innerText = formatRp(subtotal + ongkir);
+        }
+
+        function backToMenu() {
+            document.getElementById('menu-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function sendToWA() {
+            const totalStr = document.getElementById('cart-total').innerText;
+            const message = `Halo CemilFeels! Saya ${appState.userName}, mau pesan makanan nih buat mood ${appState.mood}. Total pesanan saya ${totalStr}. Tolong proses ya! ✨`;
+            const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

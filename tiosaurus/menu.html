@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cemil Feels - Rekomendasi Menu</title>
+    
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Memuat Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        // Palet kustom untuk mood
+                        mood: {
+                            marah: '#fef2f2',   // red-50
+                            marahDark: '#ef4444', // red-500
+                            sedih: '#eff6ff',   // blue-50
+                            sedihDark: '#3b82f6', // blue-500
+                            bosan: '#f3f4f6',   // gray-100
+                            bosanDark: '#6b7280', // gray-500
+                            senang: '#fff7ed',  // orange-50
+                            senangDark: '#f97316' // orange-500
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass-panel {
+                @apply bg-white/95 backdrop-blur-2xl shadow-glass border border-white/60;
+            }
+        }
+
+        /* Styling dasar scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { @apply bg-slate-200 rounded-full hover:bg-slate-300; }
+
+        /* Styling pita (ribbon) untuk level pedas */
+        .ribbon-wrapper {
+            @apply absolute -top-1 -right-1 w-24 h-24 overflow-hidden rounded-tr-[1.5rem] z-20 pointer-events-none;
+        }
+        .ribbon {
+            @apply absolute top-5 -right-7 w-32 bg-red-600 text-white text-center text-[10px] font-extrabold py-1 shadow-md uppercase tracking-wider transform rotate-45 transition-transform duration-300;
+        }
+
+        /* Efek transisi smooth untuk background body */
+        body {
+            transition: background-color 0.8s ease, background-image 0.8s ease;
+        }
+
+        /* Transisi pada pill sidebar */
+        #sidebar-pill {
+            transition: background-color 0.5s ease;
+        }
+    </style>
+</head>
+<body id="app-body" class="text-slate-800 min-h-screen flex items-center justify-center p-4 antialiased bg-mood-marah">
+
+    <!-- Container Utama -->
+    <div class="glass-panel w-full max-w-4xl h-[85vh] sm:h-[80vh] rounded-[2.5rem] p-6 sm:p-8 flex flex-col relative overflow-hidden">
+        
+        <!-- Header & Navigasi -->
+        <header class="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 mb-6 shrink-0 relative z-20 w-full border-b border-slate-100/50 pb-4">
+            
+            <!-- Area Kiri: Teks Judul dan Subtitle -->
+            <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
+                <h1 id="header-title" class="text-red-500 font-extrabold text-2xl sm:text-3xl tracking-tight">
+                    Untuk Kamu yang Lagi Kesel
+                </h1>
+                <p id="header-subtitle-container" class="text-red-400 font-medium text-sm sm:text-base mt-1">
+                    Menu pedas buat redain emosimu
+                </p>
+            </div>
+
+            <!-- Area Kanan: Navigasi Mood Pill -->
+            <div class="flex justify-center sm:justify-end mt-4 sm:mt-0">
+                <nav class="bg-slate-200/70 p-1.5 rounded-[2.5rem] flex items-center gap-2 shadow-inner border border-white/50 backdrop-blur-md">
+                    <!-- Icon Mood Sedih -->
+                    <button onclick="changeMood('sedih')" id="btn-mood-sedih" title="Sedih" class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none">
+                        <img src="../img/sad (2).png" alt="Sedih" class="w-12 h-12 object-contain">
+                    </button>
+                    <!-- Icon Mood Senang -->
+                    <button onclick="changeMood('senang')" id="btn-mood-senang" title="Senang" class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none">
+                        <img src="../img/happy (2).png" alt="Senang" class="w-12 h-12 object-contain">
+                    </button>
+                    <!-- Icon Mood Bosan -->
+                    <button onclick="changeMood('bosan')" id="btn-mood-bosan" title="Bosan" class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none">
+                        <img src="../img/boring.png" alt="Bosan" class="w-12 h-12 object-contain">
+                    </button>
+                    <!-- Icon Mood Marah -->
+                    <button onclick="changeMood('marah')" id="btn-mood-marah" title="Marah" class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none">
+                        <img src="../img/marah.png" alt="Marah" class="w-12 h-12 object-contain">
+                    </button>
+                </nav>
+            </div>
+            
+        </header>
+
+        <!-- Area Scroll Utama (Konten Menu) -->
+        <main id="main-scroll-area" class="flex-1 overflow-y-auto custom-scrollbar pr-2 sm:pr-4 pb-24 relative z-10">
+            
+            <!-- Grid Makanan 2x2 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8" id="food-grid">
+                <!-- Kartu di-injeksi via JS -->
+            </div>
+
+            <!-- Section Tambah Minuman -->
+            <div class="mb-6 mt-2 flex items-center gap-3">
+                <div class="h-px bg-slate-200 flex-1"></div>
+                <h2 class="font-bold text-slate-400 text-sm uppercase tracking-widest text-center">Tambah Minuman?</h2>
+                <div class="h-px bg-slate-200 flex-1"></div>
+            </div>
+            
+            <!-- Grid Minuman 2x2 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" id="drink-grid">
+                <!-- Kartu di-injeksi via JS -->
+            </div>
+
+        </main>
+
+        <!-- Sticky Footer (Total Harga & Tombol Lanjut) -->
+        <div class="absolute bottom-0 left-0 right-0 h-[88px] bg-white/90 backdrop-blur-md border-t border-slate-100 flex items-center justify-between px-6 sm:px-8 z-30 rounded-b-[2.5rem]">
+            <div>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-0.5">Total Pesanan</p>
+                <p class="text-2xl font-extrabold text-slate-900" id="total-price">Rp 0</p>
+            </div>
+            <button class="bg-slate-900 text-white px-6 sm:px-8 py-3.5 rounded-2xl font-bold hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/20 flex items-center gap-3 focus:outline-none active:scale-95">
+                Lanjut <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL LEVEL PEDAS (Hanya untuk Marah) -->
+    <div id="spice-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+        <div class="bg-white w-full max-w-sm rounded-[2rem] p-6 shadow-2xl transform scale-95 transition-transform duration-300" id="spice-modal-content">
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="flame" class="w-8 h-8"></i>
+                </div>
+                <h3 class="font-extrabold text-xl text-slate-900" id="modal-food-name">Nama Makanan</h3>
+                <p class="text-sm text-slate-500 mt-1">Atur tingkat kepedasan pesananmu</p>
+            </div>
+
+            <!-- Kontrol Level Pedas -->
+            <div class="flex items-center justify-between bg-slate-50 border border-slate-200 p-4 rounded-2xl mb-6">
+                <button onclick="changeModalSpiceLevel(-1)" class="w-10 h-10 bg-white rounded-xl text-slate-600 shadow-sm flex items-center justify-center hover:bg-slate-100">
+                    <i data-lucide="minus" class="w-5 h-5"></i>
+                </button>
+                <div class="text-center">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Level</p>
+                    <p class="text-3xl font-extrabold text-red-500" id="modal-spice-level">1</p>
+                </div>
+                <button onclick="changeModalSpiceLevel(1)" class="w-10 h-10 bg-white rounded-xl text-slate-600 shadow-sm flex items-center justify-center hover:bg-slate-100">
+                    <i data-lucide="plus" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <button onclick="confirmSpiceLevel()" class="w-full bg-red-500 text-white font-bold py-4 rounded-xl hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30">
+                Konfirmasi Pesanan
+            </button>
+            <button onclick="closeSpiceModal()" class="w-full mt-2 py-3 text-slate-500 font-semibold hover:text-slate-800 transition-colors">
+                Batal
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Inisialisasi ikon
+        lucide.createIcons();
+
+        // Data Menu (Menggunakan Unsplash agar tidak error gambarnya)
+        const db = {
+            marah: {
+                themeColor: 'text-red-500',
+                subtitleColor: 'text-red-400', // Warna pastel
+                bgColor: 'bg-mood-marah',
+                pillColor: 'bg-red-100',
+                title: 'Untuk Kamu yang Lagi Kesel',
+                subtitle: 'Menu pedas buat redain emosimu',
+                foods: [
+                    { id: 'm1', name: 'Bakso Mercon', price: 25000, img: 'https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=500&h=400&fit=crop' },
+                    { id: 'm2', name: 'Ceker Setan', price: 18000, img: 'https://images.unsplash.com/photo-1564834724105-918b73d1b9e0?w=500&h=400&fit=crop' },
+                    { id: 'm3', name: 'Mie Judes Dewa', price: 20000, img: 'https://images.unsplash.com/photo-1552611052-33e04de081de?w=500&h=400&fit=crop' },
+                    { id: 'm4', name: 'Geprek Emosi', price: 22000, img: 'https://images.unsplash.com/photo-1626804475297-41609ea004eb?w=500&h=400&fit=crop' }
+                ],
+                drinks: [
+                    { id: 'md1', name: 'Es Teh Jumbo', price: 7000 },
+                    { id: 'md2', name: 'Es Jeruk', price: 8000 },
+                    { id: 'md3', name: 'Es Kopi Kuat', price: 15000 },
+                    { id: 'md4', name: 'Air Es', price: 5000 }
+                ]
+            },
+            sedih: {
+                themeColor: 'text-blue-500',
+                subtitleColor: 'text-blue-400', 
+                bgColor: 'bg-mood-sedih',
+                pillColor: 'bg-blue-100',
+                title: 'Untuk Kamu yang Lagi Sedih',
+                subtitle: 'Pilih menu yang cocok buat mood kamu',
+                foods: [
+                    { id: 's1', name: 'Sop Iga Hangat', price: 45000, img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&h=400&fit=crop' },
+                    { id: 's2', name: 'Bubur Ayam', price: 15000, img: 'https://images.unsplash.com/photo-1512058454905-6b841e7ad132?w=500&h=400&fit=crop' },
+                    { id: 's3', name: 'Lava Cake', price: 25000, img: 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=500&h=400&fit=crop' },
+                    { id: 's4', name: 'Indomie Telur', price: 12000, img: 'https://images.unsplash.com/photo-1612929633738-8fe01f7280c2?w=500&h=400&fit=crop' }
+                ],
+                drinks: [
+                    { id: 'sd1', name: 'Teh Chamomile', price: 12000 },
+                    { id: 'sd2', name: 'Hot Chocolate', price: 18000 },
+                    { id: 'sd3', name: 'Wedang Jahe', price: 10000 },
+                    { id: 'sd4', name: 'Air Hangat', price: 5000 }
+                ]
+            },
+            bosan: {
+                themeColor: 'text-gray-500',
+                subtitleColor: 'text-gray-400', 
+                bgColor: 'bg-mood-bosan',
+                pillColor: 'bg-gray-200',
+                title: 'Untuk Kamu yang Lagi Bosen',
+                subtitle: 'Menu seru buat ngusir bosanmu',
+                foods: [
+                    { id: 'b1', name: 'Seblak Campur', price: 15000, img: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&h=400&fit=crop' },
+                    { id: 'b2', name: 'Dimsum Mentai', price: 25000, img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&h=400&fit=crop' },
+                    { id: 'b3', name: 'Tteokbokki', price: 30000, img: 'https://images.unsplash.com/photo-1580651315530-69c8e0026377?w=500&h=400&fit=crop' },
+                    { id: 'b4', name: 'French Fries', price: 18000, img: 'https://images.unsplash.com/photo-1576107232684-1279f390859f?w=500&h=400&fit=crop' }
+                ],
+                drinks: [
+                    { id: 'bd1', name: 'Boba Brown Sugar', price: 20000 },
+                    { id: 'bd2', name: 'Kopi Susu Aren', price: 18000 },
+                    { id: 'bd3', name: 'Taro Milkshake', price: 22000 },
+                    { id: 'bd4', name: 'Matcha Latte', price: 24000 }
+                ]
+            },
+            senang: {
+                themeColor: 'text-orange-500',
+                subtitleColor: 'text-orange-400', 
+                bgColor: 'bg-mood-senang',
+                pillColor: 'bg-orange-100',
+                title: 'Untuk Kamu yang Lagi Senang',
+                subtitle: 'Menu spesial buat rayain mood baikmu',
+                foods: [
+                    { id: 'h1', name: 'Sweet Croffle', price: 28000, img: 'https://images.unsplash.com/photo-1627308595229-7830f5c9c66e?w=500&h=400&fit=crop' },
+                    { id: 'h2', name: 'Pizza Party', price: 65000, img: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&h=400&fit=crop' },
+                    { id: 'h3', name: 'Sushi Roll', price: 85000, img: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=500&h=400&fit=crop' },
+                    { id: 'h4', name: 'Donut Pink', price: 15000, img: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=500&h=400&fit=crop' }
+                ],
+                drinks: [
+                    { id: 'hd1', name: 'Strawberry Smooth', price: 25000 },
+                    { id: 'hd2', name: 'Mocktail Blue', price: 28000 },
+                    { id: 'hd3', name: 'Ice Cream Float', price: 20000 },
+                    { id: 'hd4', name: 'Jus Mangga', price: 15000 }
+                ]
+            }
+        };
+
+        // State Aplikasi
+        let currentMood = 'marah';
+        let selectedFoodIds = new Set(); // Bisa pilih > 1 makanan
+        let selectedDrinkIds = new Set();
+        let foodSpiceHistory = {}; // Simpan level pedas: { 'm1': 3 }
+
+        // Variabel Modal
+        let activeSpiceFoodId = null;
+        let activeSpiceLevel = 1;
+
+        // Utility Format Uang
+        function formatRp(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+        }
+
+        // Render Antarmuka
+        function renderUI() {
+            const data = db[currentMood];
+            
+            // 1. Ubah Tema Warna Background Utama
+            document.getElementById('app-body').className = `text-slate-800 min-h-screen flex items-center justify-center p-4 antialiased transition-colors duration-700 ${data.bgColor}`;
+            
+            // 2. Ubah Teks Header & Subtitle
+            const headerTitle = document.getElementById('header-title');
+            headerTitle.innerText = data.title;
+            // Menghapus class "uppercase" agar kalimat mengikuti format Title/Sentence case
+            headerTitle.className = `font-extrabold text-2xl sm:text-3xl tracking-tight transition-colors duration-300 ${data.themeColor}`;
+            
+            const subtitleContainer = document.getElementById('header-subtitle-container');
+            subtitleContainer.innerText = data.subtitle;
+            subtitleContainer.className = `font-medium text-sm sm:text-base mt-1 transition-colors duration-300 ${data.subtitleColor}`;
+
+            // 3. Update Styling Navigasi Mood (Pill Atas)
+            const moodList = ['sedih', 'senang', 'bosan', 'marah'];
+            const baseBtnClass = "w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 focus:outline-none";
+            
+            moodList.forEach(m => {
+                const btn = document.getElementById(`btn-mood-${m}`);
+                if (m === currentMood) {
+                    // Beri warna latar belakang khusus dan perbesar sedikit untuk mood yang aktif
+                    const activeBg = db[m].pillColor;
+                    btn.className = `${baseBtnClass} ${activeBg} shadow-md scale-110 ring-2 ring-white border border-white/50 z-10 relative`;
+                } else {
+                    // Buat tombol mood lain jadi agak pudar (grayscale) sampai di-hover
+                    btn.className = `${baseBtnClass} bg-transparent grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:scale-105 relative z-0`;
+                }
+            });
+
+            // 4. Render Makanan
+            const foodGrid = document.getElementById('food-grid');
+            foodGrid.innerHTML = '';
+            data.foods.forEach(food => {
+                const isSelected = selectedFoodIds.has(food.id);
+                const spiceLevel = foodSpiceHistory[food.id]; // Cek apa sudah punya level pedas
+
+                const card = document.createElement('div');
+                card.className = `bg-white rounded-[1.5rem] p-3 border-2 cursor-pointer transition-all duration-300 hover:shadow-md flex items-center gap-4 relative overflow-hidden group ${isSelected ? 'border-slate-800 shadow-md' : 'border-slate-100 hover:border-slate-300'}`;
+                card.onclick = () => handleFoodClick(food);
+
+                // Elemen Ribbon (Pita Pedas) yang dibuat di sketsa
+                let ribbonHTML = '';
+                if (spiceLevel) {
+                    ribbonHTML = `
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon bg-red-600">LVL ${spiceLevel}</div>
+                        </div>
+                    `;
+                }
+
+                card.innerHTML = `
+                    ${ribbonHTML}
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 relative">
+                        <img src="${food.img}" alt="${food.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        ${isSelected ? '<div class="absolute inset-0 bg-slate-900/20 flex items-center justify-center"><div class="w-6 h-6 bg-white rounded-full flex items-center justify-center text-slate-900"><i data-lucide="check" class="w-4 h-4"></i></div></div>' : ''}
+                    </div>
+                    <div class="flex-1 pr-4">
+                        <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-tight mb-1">${food.name}</h3>
+                        <p class="font-extrabold ${data.themeColor} text-sm">${formatRp(food.price)}</p>
+                    </div>
+                `;
+                foodGrid.appendChild(card);
+            });
+
+            // 4. Render Minuman
+            const drinkGrid = document.getElementById('drink-grid');
+            drinkGrid.innerHTML = '';
+            data.drinks.forEach(drink => {
+                const isSelected = selectedDrinkIds.has(drink.id);
+                const card = document.createElement('div');
+                
+                card.className = `bg-white p-4 rounded-[1.2rem] border-2 cursor-pointer transition-all duration-300 flex items-center justify-between ${isSelected ? 'border-slate-800 shadow-sm bg-slate-50' : 'border-slate-100 hover:border-slate-300'}`;
+                card.onclick = () => toggleDrink(drink.id);
+
+                card.innerHTML = `
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-sm mb-0.5">${drink.name}</h3>
+                        <p class="font-bold text-slate-500 text-xs">${formatRp(drink.price)}</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isSelected ? 'bg-slate-800 text-white rotate-45 transform' : 'bg-slate-100 text-slate-400'}">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                    </div>
+                `;
+                drinkGrid.appendChild(card);
+            });
+
+            lucide.createIcons();
+            calculateTotal();
+        }
+
+        // Fungsi Mengganti Suasana & Auto-Scroll
+        function changeMood(mood) {
+            if (currentMood === mood) return;
+            
+            currentMood = mood;
+            
+            // Bersihkan pilihan saat pindah mood
+            selectedFoodIds.clear();
+            selectedDrinkIds.clear();
+            // foodSpiceHistory tetap disimpan
+
+            renderUI();
+
+            // Fitur Auto Scroll ke atas dengan mulus saat pindah mood
+            document.getElementById('main-scroll-area').scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Interaksi Klik Makanan
+        function handleFoodClick(food) {
+            // Jika mood Marah dan belum dipilih, buka modal pedas
+            if (currentMood === 'marah' && !selectedFoodIds.has(food.id)) {
+                openSpiceModal(food);
+            } else {
+                // Toggle pilih/batal
+                if (selectedFoodIds.has(food.id)) {
+                    selectedFoodIds.delete(food.id);
+                } else {
+                    selectedFoodIds.add(food.id);
+                }
+                renderUI();
+            }
+        }
+
+        // Interaksi Klik Minuman
+        function toggleDrink(id) {
+            if (selectedDrinkIds.has(id)) {
+                selectedDrinkIds.delete(id);
+            } else {
+                selectedDrinkIds.add(id);
+            }
+            renderUI();
+        }
+
+        // Hitung Total Belanja
+        function calculateTotal() {
+            let total = 0;
+            const data = db[currentMood];
+            
+            selectedFoodIds.forEach(id => {
+                const item = data.foods.find(f => f.id === id);
+                if(item) total += item.price;
+            });
+            
+            selectedDrinkIds.forEach(id => {
+                const item = data.drinks.find(d => d.id === id);
+                if(item) total += item.price;
+            });
+
+            document.getElementById('total-price').innerText = formatRp(total);
+        }
+
+        // --- SISTEM MODAL LEVEL PEDAS ---
+        const modal = document.getElementById('spice-modal');
+        const modalContent = document.getElementById('spice-modal-content');
+
+        function openSpiceModal(food) {
+            activeSpiceFoodId = food.id;
+            // Gunakan level sebelumnya jika ada, default 1
+            activeSpiceLevel = foodSpiceHistory[food.id] || 1; 
+            
+            document.getElementById('modal-food-name').innerText = food.name;
+            document.getElementById('modal-spice-level').innerText = activeSpiceLevel;
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }
+
+        function closeSpiceModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            activeSpiceFoodId = null;
+        }
+
+        function changeModalSpiceLevel(change) {
+            activeSpiceLevel += change;
+            if (activeSpiceLevel < 1) activeSpiceLevel = 1;
+            if (activeSpiceLevel > 5) activeSpiceLevel = 5; // Maksimal level 5
+            document.getElementById('modal-spice-level').innerText = activeSpiceLevel;
+        }
+
+        function confirmSpiceLevel() {
+            if (activeSpiceFoodId) {
+                // Simpan level ke history
+                foodSpiceHistory[activeSpiceFoodId] = activeSpiceLevel;
+                // Tandai makanan ini sebagai terpilih
+                selectedFoodIds.add(activeSpiceFoodId);
+                
+                closeSpiceModal();
+                // Render ulang agar "Pita Ribbon" muncul di kanan atas kartu
+                renderUI(); 
+            }
+        }
+
+        // Initialisasi pertama
+        window.onload = () => {
+            renderUI();
+        };
+    </script>
+</body>
+</html>
