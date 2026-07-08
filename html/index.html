@@ -1,356 +1,613 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>CemilFeels - Beranda</title>
     <!-- Meta Deskripsi untuk SEO -->
-    <meta name="description" content="CemilFeels - Treat your mood today! Ceritakan suasana hatimu hari ini dan temukan cemilan rekomendasi yang pas untuk menemani perasaanmu.">
+    <meta name="description"
+        content="CemilFeels - Treat your mood today! Ceritakan suasana hatimu hari ini dan temukan cemilan rekomendasi yang pas untuk menemani perasaanmu." />
     <!-- Google Fonts & Font Awesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
     <!-- Bootstrap 5.3 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
     <!-- Custom CSS (Gaya Global & Hero Banner) -->
-    <link rel="stylesheet" href="../css/index.css">
-    
+    <link rel="stylesheet" href="../css/index.css" />
+
     <!-- Tailwind CSS Play CDN & Safe Integration Config -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            corePlugins: {
-                preflight: false,
-            }
+        if (typeof tailwind !== "undefined") {
+            tailwind.config = {
+                corePlugins: {
+                    preflight: false,
+                },
+            };
         }
     </script>
 </head>
+
 <body>
-
-    <div class="hero-container">
-        <!-- Card Beranda dengan Gaya Glassmorphism -->
-        <div class="glass-card">
-            <h1 class="brand-title">Cemil<span>Feels</span></h1>
-            <span class="subtitle">Treat Your Mood Today ✨</span>
-            
-            <p class="text-muted mb-4">
-                Punya hari yang berat atau sedang berbunga-bunga? Ceritakan suasana hatimu hari ini, dan kami akan menyajikan rekomendasi cemilan yang pas untuk menemani perasaanmu!
-            </p>
-
-            <!-- Video Player (Simulasi Video Kuliner Estetis) -->
-            <div class="video-container">
-                <!-- Menggunakan video gratis bertema makanan/suasana rileks sebagai representasi visual -->
-                <video autoplay muted loop playsinline>
-                    <source src="../video.mp4" type="video/mp4">
-                    Browser Anda tidak mendukung tag video.
-                </video>
-            </div>
-
-            <!-- Tombol CTA Navigasi ke Mood Pemilihan -->
-            <div class="cta-wrapper">
-                <a href="moodtiosaurus.html" class="btn-cta">
-                    Mulai Curhat <i class="fas fa-chevron-right"></i>
-                </a>
+    <nav
+        class="navbar-custom sticky top-0 w-full bg-white/85 backdrop-blur-md border-b border-gray-200/50 px-4 py-3.5 z-50">
+        <div class="max-w-[720px] mx-auto flex items-center justify-between gap-4">
+            <div class="w-full flex justify-center items-center gap-3.5 sm:gap-5 mb-0">
+                <a href="index.html"
+                    class="text-xs sm:text-sm font-bold text-gray-600 hover:text-orange-500 transition-colors text-decoration-none m-3">Home</a>
+                <a href="alurkerja.html"
+                    class="text-xs sm:text-sm font-bold text-gray-600 hover:text-orange-500 transition-colors text-decoration-none m-3">Alur
+                    Kerja</a>
+                <a href="About_Us.html"
+                    class="text-xs sm:text-sm font-bold text-gray-600 hover:text-orange-500 transition-colors text-decoration-none m-3">About
+                    Us</a>
+                <a href="login.html"
+                    class="btn-gradient bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow-sm hover:shadow transition-all text-decoration-none ml-3">Login</a>
+                <a href="daftar.html"
+                    class="text-xs sm:text-sm font-bold px-4 py-2 rounded-full border border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-sm hover:shadow-orange-500/20 text-decoration-none ml-3">Daftar</a>
             </div>
         </div>
-
-        <!-- Section: Most Popular Snacks -->
-        <div class="glass-card mt-5 text-start p-6 md:p-8 rounded-xl shadow-lg border border-white/20 bg-white/85 backdrop-blur-md">
-            <div class="flex items-center justify-between mb-6">
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-800 mb-1">Cemilan Paling Populer 🔥</h2>
-                    <p class="text-sm text-gray-500 font-medium font-poppins">Jajanan Nusantara terfavorit pilihan para Mooders</p>
-                </div>
-                <span class="bg-amber-100 text-amber-700 text-xs px-3 py-1.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1.5">
-                    <i class="fas fa-star text-amber-500"></i> Best Seller
-                </span>
+    </nav>
+    <main class="hero-container">
+        <header>
+            <div
+                class="inline-flex items-center justify-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm border border-slate-100">
+                <img src="../img/CEMILAJA.png" alt="CemilFeels Logo" class="w-10 h-10 object-contain" onerror="
+              this.src = 'https://placehold.co/40x40/f97316/ffffff?text=CF'
+            " />
+                <span class="font-display font-bold text-xl tracking-tight text-slate-800">Cemil<span
+                        class="brand-title">Feels</span></span>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Card 1: Basreng Stik -->
-                <div class="group bg-white/70 hover:bg-white/90 rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="relative overflow-hidden h-36">
-                        <img src="../img/basrengstik.jpeg" alt="Basreng Stik" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                        <span class="absolute top-3 left-3 bg-red-500 text-white text-xs px-2.5 py-1 rounded-md font-bold shadow-md">
-                            Pedas 🔥
-                        </span>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-1.5">
-                            <h3 class="font-bold text-gray-800 text-base group-hover:text-orange-500 transition-colors">Basreng Stik</h3>
-                            <span class="text-orange-500 font-bold text-sm">Rp 12.000</span>
-                        </div>
-                        <p class="text-xs text-gray-500 line-clamp-2">Bakso goreng stik renyah berbalut bumbu cabai melimpah dan aroma jeruk purut segar.</p>
-                    </div>
+        </header>
+        <div class="hero-container">
+            <!-- Card Beranda dengan Gaya Glassmorphism -->
+            <div class="glass-card">
+                <span class="subtitle">Treat Your Mood Today ✨</span>
+
+                <p class="text-muted mb-4">
+                    Punya hari yang berat atau sedang berbunga-bunga? Ceritakan suasana
+                    hatimu hari ini, dan kami akan menyajikan rekomendasi cemilan yang
+                    pas untuk menemani perasaanmu!
+                </p>
+
+                <!-- Video Player (Simulasi Video Kuliner Estetis) -->
+                <div class="video-container">
+                    <!-- Menggunakan video gratis bertema makanan/suasana rileks sebagai representasi visual -->
+                    <video autoplay muted loop playsinline>
+                        <source src="../video.mp4" type="video/mp4" />
+                        Browser Anda tidak mendukung tag video.
+                    </video>
                 </div>
 
-                <!-- Card 2: Piscok Lumer Coklat -->
-                <div class="group bg-white/70 hover:bg-white/90 rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="relative overflow-hidden h-36">
-                        <img src="../img/piscok_lumer_coklat.jpeg" alt="Piscok Lumer Coklat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                        <span class="absolute top-3 left-3 bg-yellow-500 text-white text-xs px-2.5 py-1 rounded-md font-bold shadow-md">
-                            Manis 🍫
-                        </span>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-1.5">
-                            <h3 class="font-bold text-gray-800 text-base group-hover:text-orange-500 transition-colors">Piscok Lumer Coklat</h3>
-                            <span class="text-orange-500 font-bold text-sm">Rp 10.000</span>
-                        </div>
-                        <p class="text-xs text-gray-500 line-clamp-2">Pisang berselimut kulit lumpia renyah dengan isian cokelat melimpah yang lumer di setiap gigitan.</p>
-                    </div>
-                </div>
-
-                <!-- Card 3: Cireng Sambal Rujak -->
-                <div class="group bg-white/70 hover:bg-white/90 rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="relative overflow-hidden h-36">
-                        <img src="../img/cireng_sambal_rujak.jpeg" alt="Cireng Sambal Rujak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                        <span class="absolute top-3 left-3 bg-emerald-500 text-white text-xs px-2.5 py-1 rounded-md font-bold shadow-md">
-                            Asli Nusantara 🇮🇩
-                        </span>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-1.5">
-                            <h3 class="font-bold text-gray-800 text-base group-hover:text-orange-500 transition-colors">Cireng Sambal Rujak</h3>
-                            <span class="text-orange-500 font-bold text-sm">Rp 10.000</span>
-                        </div>
-                        <p class="text-xs text-gray-500 line-clamp-2">Cireng kenyal garing dicocol dengan sambal rujak asam manis pedas yang segar.</p>
-                    </div>
-                </div>
-
-                <!-- Card 4: Tahu Walik -->
-                <div class="group bg-white/70 hover:bg-white/90 rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="relative overflow-hidden h-36">
-                        <img src="../img/tahu_walik.jpeg" alt="Tahu Walik" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                        <span class="absolute top-3 left-3 bg-orange-500 text-white text-xs px-2.5 py-1 rounded-md font-bold shadow-md">
-                            Gurih 🌟
-                        </span>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-1.5">
-                            <h3 class="font-bold text-gray-800 text-base group-hover:text-orange-500 transition-colors">Tahu Walik</h3>
-                            <span class="text-orange-500 font-bold text-sm">Rp 12.000</span>
-                        </div>
-                        <p class="text-xs text-gray-500 line-clamp-2">Tahu goreng khas Banyuwangi yang dibalik dan diisi adonan bakso ayam gurih renyah.</p>
-                    </div>
+                <!-- Tombol CTA Navigasi ke Mood Pemilihan -->
+                <div class="cta-wrapper">
+                    <a href="Utama.html" class="btn-cta">
+                        Mulai Curhat <i class="fas fa-chevron-right"></i>
+                    </a>
                 </div>
             </div>
-        </div>
 
-        <!-- Section: How It Works -->
-        <div class="glass-card mt-5 text-start p-6 md:p-8 rounded-xl shadow-lg border border-white/20 bg-white/85 backdrop-blur-md">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-1">Cara Kerja CemilFeels 🚀</h2>
-                <p class="text-sm text-gray-500 font-medium font-poppins">Langkah mudah untuk mengobati suasana hatimu hari ini</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-                <!-- Step 1 -->
-                <div class="flex flex-col items-center text-center p-4 bg-white/50 rounded-xl border border-gray-100 hover:border-orange-100 transition-all duration-300">
-                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-lg font-bold mb-3 shadow-sm">
-                        1
-                    </div>
-                    <h3 class="font-bold text-gray-800 text-base mb-1">Curhat Mood</h3>
-                    <p class="text-xs text-gray-500 leading-relaxed">Beritahu kami suasana hatimu saat ini (Happy, Marah, Sedih, atau Bosan).</p>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="flex flex-col items-center text-center p-4 bg-white/50 rounded-xl border border-gray-100 hover:border-orange-100 transition-all duration-300">
-                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-lg font-bold mb-3 shadow-sm">
-                        2
-                    </div>
-                    <h3 class="font-bold text-gray-800 text-base mb-1">Pilih Rekomendasi</h3>
-                    <p class="text-xs text-gray-500 leading-relaxed">Kami otomatis menyajikan pilihan snack Nusantara terbaik yang cocok untuk mood-mu.</p>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="flex flex-col items-center text-center p-4 bg-white/50 rounded-xl border border-gray-100 hover:border-orange-100 transition-all duration-300">
-                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-lg font-bold mb-3 shadow-sm">
-                        3
-                    </div>
-                    <h3 class="font-bold text-gray-800 text-base mb-1">Order via WA</h3>
-                    <p class="text-xs text-gray-500 leading-relaxed">Kirim pesanan langsung ke WhatsApp kami tanpa ribet pendaftaran akun.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Section: Testimonials -->
-        <div class="glass-card mt-5 text-start p-6 md:p-8 rounded-xl shadow-lg border border-white/20 bg-white/85 backdrop-blur-md">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-1">Apa Kata Mereka? 🥰</h2>
-                <p class="text-sm text-gray-500 font-medium font-poppins">Ulasan jujur dari teman-teman penikmat CemilFeels</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Testimonial 1 -->
-                <div class="bg-white/50 p-5 rounded-xl border border-gray-100 flex flex-col justify-between hover:shadow-sm transition-shadow">
+            <!-- Section: Most Popular Snacks -->
+            <div
+                class="glass-card mt-5 text-start p-6 md:p-8 rounded-xl shadow-lg border border-white/20 bg-white/85 backdrop-blur-md">
+                <div class="flex items-center justify-between mb-6">
                     <div>
-                        <div class="flex items-center gap-1.5 mb-2.5">
-                            <span class="bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">
-                                Mood: Marah 🤬
+                        <h2 class="text-2xl font-bold text-gray-800 mb-1">
+                            Cemilan Paling Populer 🔥
+                        </h2>
+                        <p class="text-sm text-gray-500 font-medium font-poppins">
+                            Jajanan Nusantara terfavorit pilihan para Mooders
+                        </p>
+                    </div>
+                    <span
+                        class="bg-amber-100 text-amber-700 text-xs px-3 py-1.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fas fa-star text-amber-500"></i> Best Seller
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Card 1: Basreng Stik -->
+                    <div onclick="openSnackModal('basreng')"
+                        class="group bg-white/70 hover:bg-white/90 rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
+                        <div class="relative overflow-hidden h-28">
+                            <img src="../imgfromrifky/basrengstik.jpeg" alt="Basreng Stik"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                            <span
+                                class="absolute top-3 left-3 bg-red-500 text-white text-xs px-2.5 py-1 rounded-md font-bold shadow-md">
+                                Pedas 🔥
                             </span>
-                            <div class="flex text-amber-400 text-xs gap-0.5">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <h3
+                                    class="font-bold text-gray-800 text-base group-hover:text-orange-500 transition-colors">
+                                    Basreng Stik
+                                </h3>
+                                <span class="text-orange-500 font-bold text-sm">Rp 12.000</span>
+                            </div>
+                            <p class="text-xs text-gray-500 line-clamp-2">
+                                Bakso goreng stik renyah berbalut bumbu cabai melimpah dan
+                                aroma jeruk purut segar.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Piscok Lumer Coklat -->
+                    <div onclick="openSnackModal('piscok')"
+                        class="group bg-white/70 hover:bg-white/90 rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
+                        <div class="relative overflow-hidden h-28">
+                            <img src="../imgfromrifky/piscok_lumer_coklat.jpeg" alt="Piscok Lumer Coklat"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                            <span
+                                class="absolute top-3 left-3 bg-yellow-500 text-white text-xs px-2.5 py-1 rounded-md font-bold shadow-md">
+                                Manis 🍫
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <h3
+                                    class="font-bold text-gray-800 text-base group-hover:text-orange-500 transition-colors">
+                                    Piscok Lumer Coklat
+                                </h3>
+                                <span class="text-orange-500 font-bold text-sm">Rp 10.000</span>
+                            </div>
+                            <p class="text-xs text-gray-500 line-clamp-2">
+                                Pisang berselimut kulit lumpia renyah dengan isian cokelat
+                                melimpah yang lumer di setiap gigitan.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Cireng Sambal Rujak -->
+                    <div onclick="openSnackModal('cireng')"
+                        class="group bg-white/70 hover:bg-white/90 rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
+                        <div class="relative overflow-hidden h-28">
+                            <img src="../imgfromrifky/cireng_sambal_rujak.jpeg" alt="Cireng Sambal Rujak"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                            <span
+                                class="absolute top-3 left-3 bg-emerald-500 text-white text-xs px-2.5 py-1 rounded-md font-bold shadow-md">
+                                Asli Nusantara 🇮🇩
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <h3
+                                    class="font-bold text-gray-800 text-base group-hover:text-orange-500 transition-colors">
+                                    Cireng Sambal Rujak
+                                </h3>
+                                <span class="text-orange-500 font-bold text-sm">Rp 10.000</span>
+                            </div>
+                            <p class="text-xs text-gray-500 line-clamp-2">
+                                Cireng kenyal garing dicocol dengan sambal rujak asam manis
+                                pedas yang segar.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Tahu Walik -->
+                    <div onclick="openSnackModal('tahu')"
+                        class="group bg-white/70 hover:bg-white/90 rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
+                        <div class="relative overflow-hidden h-28">
+                            <img src="../imgfromrifky/tahu_walik.jpeg" alt="Tahu Walik"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                            <span
+                                class="absolute top-3 left-3 bg-orange-500 text-white text-xs px-2.5 py-1 rounded-md font-bold shadow-md">
+                                Gurih 🌟
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <h3
+                                    class="font-bold text-gray-800 text-base group-hover:text-orange-500 transition-colors">
+                                    Tahu Walik
+                                </h3>
+                                <span class="text-orange-500 font-bold text-sm">Rp 12.000</span>
+                            </div>
+                            <p class="text-xs text-gray-500 line-clamp-2">
+                                Tahu goreng khas Banyuwangi yang dibalik dan diisi adonan
+                                bakso ayam gurih renyah.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: Testimonials -->
+            <div id="testimonialSection"
+                class="glass-card mt-5 text-start p-6 md:p-8 rounded-xl shadow-lg border border-white/20 bg-white/85 backdrop-blur-md overflow-hidden">
+                <div class="mb-6 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-1">
+                            Apa Kata Mereka? 🥰
+                        </h2>
+                        <p class="text-sm text-gray-500 font-medium font-poppins">
+                            Ulasan jujur dari teman-teman penikmat CemilFeels
+                        </p>
+                    </div>
+                    <div class="flex gap-2 mb-0">
+                        <button onclick="slidePrev()"
+                            class="w-8 h-8 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:border-orange-500 hover:text-orange-500 transition-colors cursor-pointer text-xs">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button onclick="slideNext()"
+                            class="w-8 h-8 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:border-orange-500 hover:text-orange-500 transition-colors cursor-pointer text-xs">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden w-full py-2">
+                    <div id="testimonialTrack" class="flex gap-6 transition-transform duration-500 ease-in-out w-full"
+                        style="transform: translateX(0%)">
+                        <!-- Testimonial 1 -->
+                        <div
+                            class="testimonial-card flex-none w-full md:w-[calc(50%-12px)] bg-white/50 p-5 rounded-xl border border-gray-100 flex flex-col justify-between hover:shadow-md cursor-pointer transition-all duration-300 transform hover:-translate-y-1 hover:border-orange-300">
+                            <div>
+                                <div class="flex items-center gap-1.5 mb-2.5">
+                                    <span
+                                        class="bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">
+                                        Mood: Marah 🤬
+                                    </span>
+                                    <div class="flex text-amber-400 text-xs gap-0.5">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 leading-relaxed italic mb-4">
+                                    "Lagi pusing banget ngerjain tugas akhir terus nyoba curhat
+                                    di CemilFeels. Direkomendasiin Basreng Stik pedes level 4.
+                                    Sumpah pedesnya bikin melek, stres langsung ilang! Mantap!"
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-600 text-sm">
+                                    AD
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-xs mb-0.5">
+                                        Adi Darmawan
+                                    </h4>
+                                    <span class="text-[10px] text-gray-400">Mahasiswa, Jakarta</span>
+                                </div>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-600 leading-relaxed italic mb-4">"Lagi pusing banget ngerjain tugas akhir terus nyoba curhat di CemilFeels. Direkomendasiin Basreng Stik pedes level 4. Sumpah pedesnya bikin melek, stres langsung ilang! Mantap!"</p>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-600 text-sm">
-                            AD
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800 text-xs mb-0.5">Adi Darmawan</h4>
-                            <span class="text-[10px] text-gray-400">Mahasiswa, Jakarta</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Testimonial 2 -->
-                <div class="bg-white/50 p-5 rounded-xl border border-gray-100 flex flex-col justify-between hover:shadow-sm transition-shadow">
-                    <div>
-                        <div class="flex items-center gap-1.5 mb-2.5">
-                            <span class="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">
-                                Mood: Sedih 😢
-                            </span>
-                            <div class="flex text-amber-400 text-xs gap-0.5">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <!-- Testimonial 2 -->
+                        <div
+                            class="testimonial-card flex-none w-full md:w-[calc(50%-12px)] bg-white/50 p-5 rounded-xl border border-gray-100 flex flex-col justify-between hover:shadow-md cursor-pointer transition-all duration-300 transform hover:-translate-y-1 hover:border-orange-300">
+                            <div>
+                                <div class="flex items-center gap-1.5 mb-2.5">
+                                    <span
+                                        class="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">
+                                        Mood: Sedih 😢
+                                    </span>
+                                    <div class="flex text-amber-400 text-xs gap-0.5">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 leading-relaxed italic mb-4">
+                                    "Habis diputusin pacar rasanya galau banget. Buka web ini
+                                    dan pilih mood sedih, direkomendasikan Piscok Lumer Coklat.
+                                    Pas dimakan cokelatnya lumer parah, langsung berasa dapet
+                                    pelukan hangat. Mood booster sejati!"
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-9 h-9 rounded-full bg-pink-100 flex items-center justify-center font-bold text-pink-600 text-sm">
+                                    RM
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-xs mb-0.5">
+                                        Rara Maulida
+                                    </h4>
+                                    <span class="text-[10px] text-gray-400">Content Writer, Bandung</span>
+                                </div>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-600 leading-relaxed italic mb-4">"Habis diputusin pacar rasanya galau banget. Buka web ini dan pilih mood sedih, direkomendasikan Piscok Lumer Coklat. Pas dimakan cokelatnya lumer parah, langsung berasa dapet pelukan hangat. Mood booster sejati!"</p>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-pink-100 flex items-center justify-center font-bold text-pink-600 text-sm">
-                            RM
+
+                        <!-- Testimonial 3 -->
+                        <div
+                            class="testimonial-card flex-none w-full md:w-[calc(50%-12px)] bg-white/50 p-5 rounded-xl border border-gray-100 flex flex-col justify-between hover:shadow-md cursor-pointer transition-all duration-300 transform hover:-translate-y-1 hover:border-orange-300">
+                            <div>
+                                <div class="flex items-center gap-1.5 mb-2.5">
+                                    <span
+                                        class="bg-yellow-100 text-yellow-700 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">
+                                        Mood: Bosan 😐
+                                    </span>
+                                    <div class="flex text-amber-400 text-xs gap-0.5">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 leading-relaxed italic mb-4">
+                                    "Sore-sore gabut ngerjain revisi logo. Nyobain curhat pilih
+                                    mood bosan, dapet rekomendasi Keripik Pangsit Renyah.
+                                    Kriuknya nagih banget, bikin tangan gatel pengen nyemil
+                                    terus. Recommended!"
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-9 h-9 rounded-full bg-yellow-100 flex items-center justify-center font-bold text-yellow-600 text-sm">
+                                    BS
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-xs mb-0.5">
+                                        Budi Santoso
+                                    </h4>
+                                    <span class="text-[10px] text-gray-400">Designer, Yogyakarta</span>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800 text-xs mb-0.5">Rara Maulida</h4>
-                            <span class="text-[10px] text-gray-400">Content Writer, Bandung</span>
+
+                        <!-- Testimonial 4 -->
+                        <div
+                            class="testimonial-card flex-none w-full md:w-[calc(50%-12px)] bg-white/50 p-5 rounded-xl border border-gray-100 flex flex-col justify-between hover:shadow-md cursor-pointer transition-all duration-300 transform hover:-translate-y-1 hover:border-orange-300">
+                            <div>
+                                <div class="flex items-center gap-1.5 mb-2.5">
+                                    <span
+                                        class="bg-emerald-100 text-emerald-700 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">
+                                        Mood: Senang 🥰
+                                    </span>
+                                    <div class="flex text-amber-400 text-xs gap-0.5">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 leading-relaxed italic mb-4">
+                                    "Lagi santai sore bareng keluarga, iseng pesen Tahu Walik
+                                    Krispi. Rasanya gurih mantap, luarnya garing dalemnya kenyal
+                                    lembut ayamnya kerasa banget. Anak-anak langsung lahap
+                                    makannya!"
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-emerald-600 text-sm">
+                                    SR
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-xs mb-0.5">
+                                        Siti Rahma
+                                    </h4>
+                                    <span class="text-[10px] text-gray-400">Ibu Rumah Tangga, Jakarta</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Section: Instagram Feed Badge -->
+            <div
+                class="glass-card mt-5 text-start p-6 md:p-8 rounded-xl shadow-lg border border-white/20 bg-white/85 backdrop-blur-md">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-1">
+                            Ikuti Kami di Instagram 📸
+                        </h2>
+                        <p class="text-sm text-gray-500 font-medium font-poppins">
+                            Dapatkan update menu terbaru & promo menarik setiap harinya
+                        </p>
+                    </div>
+                    <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-500 hover:from-purple-700 hover:to-yellow-600 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 text-decoration-none">
+                        <i class="fab fa-instagram text-sm"></i> @rifky_kiki13
+                    </a>
+                </div>
+
+                <!-- Instagram Grid Mockup -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <!-- Post 1 -->
+                    <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer"
+                        class="group relative overflow-hidden rounded-lg aspect-square block bg-gray-100 border border-gray-100 shadow-sm">
+                        <img src="/imgfromrifky/basrengstik.jpeg" alt="Instagram Post 1"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white gap-3 text-xs font-semibold">
+                            <span><i class="fas fa-heart mr-1"></i> 142</span>
+                            <span><i class="fas fa-comment mr-1"></i> 18</span>
+                        </div>
+                    </a>
+
+                    <!-- Post 2 -->
+                    <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer"
+                        class="group relative overflow-hidden rounded-lg aspect-square block bg-gray-100 border border-gray-100 shadow-sm">
+                        <img src="../imgfromrifky/bola_bola_coklat.jpeg" alt="Instagram Post 2"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white gap-3 text-xs font-semibold">
+                            <span><i class="fas fa-heart mr-1"></i> 98</span>
+                            <span><i class="fas fa-comment mr-1"></i> 12</span>
+                        </div>
+                    </a>
+
+                    <!-- Post 3 -->
+                    <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer"
+                        class="group relative overflow-hidden rounded-lg aspect-square block bg-gray-100 border border-gray-100 shadow-sm">
+                        <img src="../imgfromrifky/cireng_sambal_rujak.jpeg" alt="Instagram Post 3"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white gap-3 text-xs font-semibold">
+                            <span><i class="fas fa-heart mr-1"></i> 120</span>
+                            <span><i class="fas fa-comment mr-1"></i> 15</span>
+                        </div>
+                    </a>
+
+                    <!-- Post 4 -->
+                    <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer"
+                        class="group relative overflow-hidden rounded-lg aspect-square block bg-gray-100 border border-gray-100 shadow-sm">
+                        <img src="../imgfromrifky/makaroni_bantet.jpeg" alt="Instagram Post 4"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white gap-3 text-xs font-semibold">
+                            <span><i class="fas fa-heart mr-1"></i> 115</span>
+                            <span><i class="fas fa-comment mr-1"></i> 9</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer
+                class="w-full max-w-[720px] bg-white/85 backdrop-blur-md border border-white/20 rounded-2xl p-6 md:p-8 mt-8 shadow-lg text-start">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <img src="../img/CEMILAJA.png" alt="Logo" class="h-8 w-auto" />
+                            <span class="font-bold text-gray-800 text-lg">Cemil<span
+                                    class="text-orange-500">Feels</span></span>
+                        </div>
+                        <p class="text-xs text-gray-500 leading-relaxed max-w-xs">
+                            Obati suasana hatimu dengan rekomendasi jajanan Nusantara
+                            pilihan. Dari yang manis lumer sampai yang pedas membakar stres!
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:items-end justify-between">
+                        <div class="flex gap-3 mt-5 sm:mb-0">
+                            <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer"
+                                class="w-8 h-8 rounded-full bg-gray-100/80 flex items-center justify-center text-gray-600 hover:bg-orange-100 hover:text-orange-500 transition-all text-decoration-none">
+                                <i class="fab fa-instagram text-sm"></i>
+                            </a>
+                            <a href="https://wa.me/#" target="_blank" rel="noopener noreferrer"
+                                class="w-8 h-8 rounded-full bg-gray-100/80 flex items-center justify-center text-gray-600 hover:bg-orange-100 hover:text-orange-500 transition-all text-decoration-none">
+                                <i class="fab fa-whatsapp text-sm"></i>
+                            </a>
+                            <a href="moodtiosaurus.html"
+                                class="w-8 h-8 rounded-full bg-gray-100/80 flex items-center justify-center text-gray-600 hover:bg-orange-100 hover:text-orange-500 transition-all text-decoration-none">
+                                <i class="fas fa-heart text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-gray-200/60 my-4" />
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] text-gray-400">
+                    <span>&copy; 2026 CemilFeels. Proyek Kuliah Client-Side.</span>
+                    <div class="flex gap-3 mb-0">
+                        <a href="index.html"
+                            class="hover:text-orange-500 transition-colors text-decoration-none">Beranda</a>
+                        <a href="alurkerja.html"
+                            class="hover:text-orange-500 transition-colors text-decoration-none">Alur kerja</a>
+                        <a href="About_Us.html"
+                            class="hover:text-orange-500 transition-colors text-decoration-none">About Us</a>
+                        <a href="#" class="hover:text-gray-600 text-decoration-none">Syarat & Ketentuan</a>
+                        <a href="#" class="hover:text-gray-600 text-decoration-none">Kebijakan Privasi</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <!-- Modal Detail Snack Populer -->
+    <div id="snackDetailModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm opacity-0 invisible transition-all duration-300">
+        <div
+            class="bg-white rounded-2xl max-w-sm w-11/12 overflow-hidden shadow-2xl transform scale-95 transition-all duration-300">
+            <div class="relative h-48 w-full">
+                <img id="modalSnackImg" src="" alt="" class="w-full h-full object-cover" />
+                <button onclick="closeSnackModal()"
+                    class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center shadow-md border-0 transition-colors cursor-pointer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-5 text-start">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 id="modalSnackName" class="font-bold text-gray-800 text-lg mb-0"></h3>
+                    <span id="modalSnackPrice" class="text-orange-500 font-bold text-base"></span>
+                </div>
+                <div class="flex items-center gap-2 mb-3">
+                    <span id="modalSnackTag" class="text-white text-[10px] px-2 py-0.5 rounded font-bold"></span>
+                    <span id="modalSnackSales"
+                        class="bg-orange-50 text-orange-600 text-[10px] px-2 py-0.5 rounded font-bold"></span>
+                </div>
+                <p id="modalSnackDesc" class="text-xs text-gray-600 leading-relaxed mb-4"></p>
+                <div class="flex justify-end gap-2.5">
+                    <button onclick="closeSnackModal()"
+                        class="px-4 py-2 border border-gray-200 text-gray-600 text-xs font-bold rounded-lg hover:bg-gray-50 transition-colors cursor-pointer bg-white">
+                        Tutup
+                    </button>
+                    <a id="modalSnackBuyBtn" href="Utama.html"
+                        class="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs font-bold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-colors text-decoration-none shadow-sm shadow-orange-500/10">Beli
+                        Sekarang</a>
                 </div>
             </div>
         </div>
-
-        <!-- Section: Instagram Feed Badge -->
-        <div class="glass-card mt-5 text-start p-6 md:p-8 rounded-xl shadow-lg border border-white/20 bg-white/85 backdrop-blur-md">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-800 mb-1">Ikuti Kami di Instagram 📸</h2>
-                    <p class="text-sm text-gray-500 font-medium font-poppins">Dapatkan update menu terbaru & promo menarik setiap harinya</p>
-                </div>
-                <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-500 hover:from-purple-700 hover:to-yellow-600 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 text-decoration-none">
-                    <i class="fab fa-instagram text-sm"></i> @rifky_kiki13
-                </a>
-            </div>
-
-            <!-- Instagram Grid Mockup -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <!-- Post 1 -->
-                <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer" class="group relative overflow-hidden rounded-lg aspect-square block bg-gray-100 border border-gray-100 shadow-sm">
-                    <img src="../img/basrengstik.jpeg" alt="Instagram Post 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white gap-3 text-xs font-semibold">
-                        <span><i class="fas fa-heart mr-1"></i> 142</span>
-                        <span><i class="fas fa-comment mr-1"></i> 18</span>
-                    </div>
-                </a>
-
-                <!-- Post 2 -->
-                <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer" class="group relative overflow-hidden rounded-lg aspect-square block bg-gray-100 border border-gray-100 shadow-sm">
-                    <img src="../img/piscok_lumer_coklat.jpeg" alt="Instagram Post 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white gap-3 text-xs font-semibold">
-                        <span><i class="fas fa-heart mr-1"></i> 98</span>
-                        <span><i class="fas fa-comment mr-1"></i> 12</span>
-                    </div>
-                </a>
-
-                <!-- Post 3 -->
-                <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer" class="group relative overflow-hidden rounded-lg aspect-square block bg-gray-100 border border-gray-100 shadow-sm">
-                    <img src="../img/cireng_sambal_rujak.jpeg" alt="Instagram Post 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white gap-3 text-xs font-semibold">
-                        <span><i class="fas fa-heart mr-1"></i> 120</span>
-                        <span><i class="fas fa-comment mr-1"></i> 15</span>
-                    </div>
-                </a>
-
-                <!-- Post 4 -->
-                <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer" class="group relative overflow-hidden rounded-lg aspect-square block bg-gray-100 border border-gray-100 shadow-sm">
-                    <img src="../img/tahu_walik.jpeg" alt="Instagram Post 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white gap-3 text-xs font-semibold">
-                        <span><i class="fas fa-heart mr-1"></i> 115</span>
-                        <span><i class="fas fa-comment mr-1"></i> 9</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="w-full max-w-[720px] bg-white/85 backdrop-blur-md border border-white/20 rounded-2xl p-6 md:p-8 mt-8 shadow-lg text-start">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <div class="flex items-center gap-2 mb-3">
-                        <img src="../img/CEMILLOGOpnggggggggggggg.png" alt="Logo" class="h-8 w-auto">
-                        <span class="font-bold text-gray-800 text-lg">Cemil<span class="text-orange-500">Feels</span></span>
-                    </div>
-                    <p class="text-xs text-gray-500 leading-relaxed max-w-xs">
-                        Obati suasana hatimu dengan rekomendasi jajanan Nusantara pilihan. Dari yang manis lumer sampai yang pedas membakar stres!
-                    </p>
-                </div>
-                <div class="flex flex-col sm:items-end justify-between">
-                    <div class="flex gap-3 mb-4 sm:mb-0">
-                        <a href="https://www.instagram.com/rifky_kiki13" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-gray-100/80 flex items-center justify-center text-gray-600 hover:bg-orange-100 hover:text-orange-500 transition-all text-decoration-none">
-                            <i class="fab fa-instagram text-sm"></i>
-                        </a>
-                        <a href="https://wa.me/#" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-gray-100/80 flex items-center justify-center text-gray-600 hover:bg-orange-100 hover:text-orange-500 transition-all text-decoration-none">
-                            <i class="fab fa-whatsapp text-sm"></i>
-                        </a>
-                        <a href="moodtiosaurus.html" class="w-8 h-8 rounded-full bg-gray-100/80 flex items-center justify-center text-gray-600 hover:bg-orange-100 hover:text-orange-500 transition-all text-decoration-none">
-                            <i class="fas fa-heart text-sm"></i>
-                        </a>
-                    </div>
-                    <div class="flex gap-4 text-xs font-semibold text-gray-500 mb-0">
-                        <a href="index.html" class="hover:text-orange-500 transition-colors text-decoration-none">Beranda</a>
-                        <a href="moodtiosaurus.html" class="hover:text-orange-500 transition-colors text-decoration-none">Pilih Mood</a>
-                        <a href="menu.html" class="hover:text-orange-500 transition-colors text-decoration-none">Menu</a>
-                    </div>
-                </div>
-            </div>
-            <hr class="border-gray-200/60 my-4">
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] text-gray-400">
-                <span>&copy; 2026 CemilFeels. Proyek Kuliah Client-Side.</span>
-                <div class="flex gap-3 mb-0">
-                    <a href="#" class="hover:text-gray-600 text-decoration-none">Syarat & Ketentuan</a>
-                    <a href="#" class="hover:text-gray-600 text-decoration-none">Kebijakan Privasi</a>
-                </div>
-            </div>
-        </footer>
     </div>
 
     <!-- Bootstrap 5.3 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Inisialisasi JavaScript untuk Reset Sesi Halaman -->
+    <script src="../js/index.js"></script>
+
+    <!-- Floating Scroll-to-Top Button -->
+    <button id="scrollToTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" style="
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 9999;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #f97316, #ea580c);
+        color: white;
+        border: none;
+        box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(12px);
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease,
+          visibility 0.3s ease,
+          box-shadow 0.2s ease;
+      " title="Kembali ke atas">
+        <i class="fas fa-chevron-up"></i>
+    </button>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Logika penting: Menghapus data transaksi sebelumnya dari localStorage
-            // saat pengguna kembali ke halaman utama untuk memastikan alur data yang konsisten.
-            const keysToClear = [
-                'user_name', 
-                'delivery_method', 
-                'user_address', 
-                'selected_mood', 
-                'selected_food_name', 
-                'selected_food_price', 
-                'has_ulcer', 
-                'spicy_level', 
-                'selected_drink_name', 
-                'selected_drink_price'
-            ];
-            
-            keysToClear.forEach(key => localStorage.removeItem(key));
-            console.log("Sesi belanja sebelumnya telah dibersihkan.");
-        });
+        (function () {
+            var btn = document.getElementById("scrollToTopBtn");
+            if (btn) {
+                window.addEventListener("scroll", function () {
+                    if (window.scrollY > 300) {
+                        btn.style.opacity = "1";
+                        btn.style.visibility = "visible";
+                        btn.style.transform = "translateY(0)";
+                    } else {
+                        btn.style.opacity = "0";
+                        btn.style.visibility = "hidden";
+                        btn.style.transform = "translateY(12px)";
+                    }
+                });
+                btn.addEventListener("mouseenter", function () {
+                    btn.style.boxShadow = "0 8px 25px rgba(249,115,22,0.55)";
+                    btn.style.transform =
+                        window.scrollY > 300
+                            ? "translateY(-2px) scale(1.08)"
+                            : "translateY(12px)";
+                });
+                btn.addEventListener("mouseleave", function () {
+                    btn.style.boxShadow = "0 6px 20px rgba(249,115,22,0.4)";
+                    btn.style.transform =
+                        window.scrollY > 300 ? "translateY(0)" : "translateY(12px)";
+                });
+            }
+        })();
     </script>
 </body>
+
 </html>

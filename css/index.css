@@ -24,22 +24,84 @@
 body {
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('../img/background.jpg');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('../imgfromrifky/background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: var(--text-dark);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
+    display: block;
     overflow-x: hidden;
-    padding: 40px 20px;
-    border-radius: 12px;
+    padding: 0;
+    margin: 0;
 }
+        .hero-container {
+    max-width: 720px;
+    width: 100%;
+    margin: 40px auto; /* Membuat konten bawah otomatis ke tengah */
+    padding: 0 20px;   /* Jarak aman kanan kiri di layar hp */
+    text-align: center;
+}
+
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    padding: 12px 0;
+    width: 100% !important; /* Memastikan navbar selalu selebar layar */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Tambahan estetika agar stand out */
+}
+        .navbar-nav .nav-link {
+            color: #5d4037 !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 16px !important;
+            transition: color 0.2s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-item.active .nav-link {
+            color: #e64a19 !important;
+        }
+
+        /* Tombol Login Semi-Formal Bergradasi */
+        .btn-gradient {
+            background: linear-gradient(135deg, #ff9800 0%, #e65100 100%);
+            color: white !important;
+            padding: 8px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-block;
+            transition: opacity 0.2s, transform 0.2s;
+            text-align: center;
+        }
+        .btn-daftar{
+            background: linear-gradient(135deg, #FFFFFF 0%, #ffffff 100%);
+            color: black !important;
+            padding: 8px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-block;
+            transition: opacity 0.2s, transform 0.2s;
+            text-align: center;
+        }
+
+        .btn-gradient:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+            color: white !important;
+        }
+
+        /* Container Utama */
+        .container-content {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
 
 /* Lapisan gelap (overlay) di atas background agar teks kontras dan mudah dibaca */
 body::before {
@@ -88,20 +150,17 @@ body::before {
     text-align: center;
 }
 
-.brand-title {
-    font-size: 2.5rem;
+.brand-title{
+    font-size: 1.5rem;
     font-weight: 800;
     color: var(--text-dark);
     letter-spacing: -0.5px;
     margin-bottom: 5px;
-}
-
-.brand-title span {
     color: var(--primary);
 }
 
 .subtitle {
-    font-size: 1rem;
+    font-size: 2.0rem;
     font-weight: 500;
     color: var(--text-grey);
     margin-bottom: 25px;
@@ -159,4 +218,148 @@ body::before {
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.8);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+@media (max-width: 768px) {
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+/* ==========================================================================
+   NAVBAR & FOOTER FALLBACK & FIX STYLES
+   ========================================================================== */
+
+/* Fallback styling for navbar (in case Tailwind CSS fails to load) */
+.navbar-custom {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    padding: 14px 20px !important;
+    z-index: 1000 !important;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.navbar-custom .max-w-\[720px\] {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.navbar-custom .flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-custom a.text-decoration-none {
+    text-decoration: none;
+}
+
+.navbar-custom a.text-gray-600 {
+    color: #4b5563 !important;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+}
+
+.navbar-custom a.text-gray-600:hover {
+    color: var(--primary) !important;
+}
+
+.navbar-custom a.text-orange-500 {
+    color: var(--primary) !important;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.navbar-custom a.bg-gradient-to-r {
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover)) !important;
+    color: #ffffff !important;
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 8px 18px !important;
+    border-radius: 50px !important;
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2) !important;
+    transition: all 0.3s ease;
+}
+
+.navbar-custom a.bg-gradient-to-r:hover {
+    box-shadow: 0 6px 15px rgba(255, 152, 0, 0.3) !important;
+    transform: translateY(-1px);
+}
+
+/* Fallback styling for footer (in case Tailwind CSS fails to load) */
+footer {
+    width: 100%;
+    max-width: 720px;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 16px !important;
+    padding: 32px !important;
+    margin-top: 32px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    text-align: left !important;
+    box-sizing: border-box;
+}
+
+footer .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    footer .sm\:items-end {
+        align-items: flex-end;
+    }
+}
+
+footer .flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+footer .flex {
+    display: flex;
+    align-items: center;
+}
+
+footer .gap-3 {
+    gap: 12px;
+}
+
+footer .gap-4 {
+    gap: 16px;
+}
+
+footer hr {
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+    margin: 16px 0 !important;
+}
+
+footer a {
+    text-decoration: none;
+}
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav {
+        flex-direction: row;
+    }
 }

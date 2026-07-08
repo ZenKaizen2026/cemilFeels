@@ -1,0 +1,327 @@
+        /* Base Reset ala Tailwind CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc; /* slate-50 */
+            color: #334155; /* slate-700 */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar ala Tailwind */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 0;
+        }
+
+        .navbar-nav .nav-link {
+            color: #475569 !important;
+            font-weight: 500;
+            font-size: 0.937rem;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.15s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover, 
+        .navbar-nav .nav-item.active .nav-link {
+            color: #ea580c !important;
+        }
+
+        .btn-nav-login {
+            border: 1px solid #ea580c;
+            color: #ea580c !important;
+            padding: 0.5rem 1.25rem !important;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.15s ease-in-out;
+        }
+
+        .btn-nav-login:hover {
+            background-color: #fff7ed;
+        }
+
+        /* Main Section Wrapper */
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1rem;
+        }
+
+        /* Card Konten Utama */
+        .workflow-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.5rem; /* rounded-2xl */
+            width: 100%;
+            max-width: 68rem; /* max-w-6xl */
+            padding: 4rem 3rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+
+        /* Header */
+        .workflow-header {
+            text-align: center;
+            margin-bottom: 4.5rem;
+        }
+
+        .workflow-header h2 {
+            font-size: 2.25rem; /* text-4xl */
+            color: #0f172a;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.75rem;
+        }
+
+        .workflow-header p {
+            color: #64748b;
+            font-size: 1.125rem;
+            max-width: 32rem;
+            margin: 0 auto;
+        }
+
+        /* Grid Langkah dengan Garis Penghubung (Khas Tailwind Komponen) */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2.5rem;
+            position: relative;
+        }
+
+        /* Kartu Langkah Individual */
+        .step-item {
+            position: relative;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step-item:hover {
+            transform: translateY(-6px);
+            border-color: #fdba74; /* orange-300 */
+            box-shadow: 0 12px 20px -3px rgba(234, 88, 12, 0.05);
+        }
+
+        /* Lingkaran Nomor dengan Gradasi Cantik */
+        .step-number-badge {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%); /* orange-100 to orange-200 */
+            color: #ea580c; /* orange-600 */
+            font-size: 1.25rem;
+            font-weight: 800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(234, 88, 12, 0.1);
+            border: 4px solid #ffffff;
+        }
+
+        /* Icon Besar Penjelas */
+        .step-icon-wrapper {
+            font-size: 2.5rem;
+            color: #f97316; /* orange-500 */
+            margin-bottom: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .step-item h3 {
+            font-size: 1.25rem;
+            color: #1e293b;
+            font-weight: 700;
+            margin-bottom: 0.875rem;
+        }
+
+        .step-item p {
+            font-size: 0.937rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* --- SEKSI TAMBAHAN: LIVE INTERACTIVE PREVIEW BOX --- */
+        .live-preview-box {
+            margin-top: 5rem;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); /* orange-50 to orange-100 */
+            border-radius: 1rem;
+            padding: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            border: 1px solid #fed7aa;
+        }
+
+        .preview-text {
+            max-width: 55%;
+        }
+
+        .preview-text h4 {
+            font-size: 1.25rem;
+            color: #7c2d12; /* orange-900 */
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .preview-text p {
+            color: #9a3412; /* orange-800 */
+            font-size: 0.937rem;
+            line-height: 1.5;
+        }
+
+        /* Mini Simulator UI Mockup di Kanan */
+        .preview-simulator {
+            background: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .simulator-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .mood-selector-mini {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .mood-btn-mini {
+            font-size: 0.812rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.5rem;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .mood-btn-mini.active {
+            background: #ea580c;
+            color: #ffffff;
+            border-color: #ea580c;
+        }
+
+        .prescription-result {
+            background: #f8fafc;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            font-size: 0.812rem;
+            border-left: 3px solid #ea580c;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Responsif Layout */
+        @media (max-width: 991px) {
+            .steps-grid {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+                gap: 3.5rem;
+            }
+            .live-preview-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+            .preview-text {
+                max-width: 100%;
+            }
+        }
+
+        /* Footer */
+        .tech-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            padding: 1.5rem 0;
+            border-top: 1px solid #f1f5f9;
+            background-color: #ffffff;
+            width: 100%;
+        }
+
+        /* Navbar Custom (Samakan dengan index.css) */
+        .navbar-custom {
+            display: flex !important;
+            align-items: center;
+            justify-content: space-between;
+            width: 100% !important;
+            max-width: 100% !important;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+            padding: 14px 20px !important;
+            z-index: 1000 !important;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+
+        .navbar-custom .flex {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-custom a.text-decoration-none {
+            text-decoration: none;
+        }
+
+        .navbar-custom a.text-gray-600 {
+            color: #4b5563 !important;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .navbar-custom a.text-gray-600:hover {
+            color: #ff9800 !important;
+        }
+
+        .navbar-custom a.bg-gradient-to-r {
+            background: linear-gradient(135deg, #ff9800, #e65100) !important;
+            color: #ffffff !important;
+            font-size: 0.875rem;
+            font-weight: 700;
+            padding: 8px 18px !important;
+            border-radius: 50px !important;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2) !important;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-custom a.bg-gradient-to-r:hover {
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.3) !important;
+            transform: translateY(-1px);
+        }

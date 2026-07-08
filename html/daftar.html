@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun | CemilFeels - The Snack Pharmacy</title>
+    <!-- Meta SEO -->
+    <meta name="description" content="Daftar akun CemilFeels untuk mendapatkan rekomendasi snack terbaik penawar suasana hatimu.">
+
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Memuat Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Bootstrap 5 CSS (Consistent with other pages) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS (Separated) -->
+    <link rel="stylesheet" href="/css/daftar.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff7ed', 100: '#ffedd5', 200: '#fed7aa',
+                            300: '#fdba74', 400: '#fb923c', 500: '#f97316',
+                            600: '#ea580c', 700: '#c2410c',
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans antialiased selection:bg-brand-200 selection:text-brand-800 min-h-screen flex flex-col justify-between">
+
+    <!-- Navbar Sticky -->
+    <nav class="navbar-custom sticky top-0 w-full bg-white/85 backdrop-blur-md border-b border-gray-200/50 px-4 py-3.5 z-50">
+        <div class="max-w-[720px] mx-auto flex items-center justify-between gap-4">
+            <div class="w-full flex justify-center items-center gap-3.5 sm:gap-5 mb-0">
+                <a href="index.html" class="text-xs sm:text-sm font-bold text-gray-600 hover:text-orange-500 transition-colors text-decoration-none m-3">Home</a>
+                <a href="alurkerja.html" class="text-xs sm:text-sm font-bold text-gray-600 hover:text-orange-500 transition-colors text-decoration-none m-3">Alur Kerja</a>
+                <a href="About_Us.html" class="text-xs sm:text-sm font-bold text-gray-600 hover:text-orange-500 transition-colors text-decoration-none m-3">About Us</a>
+                <a href="login.html" class="btn-gradient bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow-sm hover:shadow transition-all text-decoration-none ml-3">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Registration Section -->
+    <main class="flex-1 w-full flex items-center justify-center p-4 sm:p-8 my-8">
+        <div class="w-full max-w-lg glass-panel rounded-[2rem] p-6 sm:p-8 animate-fade-up relative overflow-hidden">
+            
+            <!-- Floating Accents (Same theme as Utama.html) -->
+            <div class="absolute -top-12 -left-12 w-24 h-24 bg-brand-200/40 rounded-full blur-xl pointer-events-none"></div>
+            <div class="absolute -bottom-12 -right-12 w-28 h-28 bg-brand-300/30 rounded-full blur-xl pointer-events-none"></div>
+
+            <!-- Title & Heading -->
+            <div class="text-center mb-6 relative">
+                <div class="inline-flex items-center justify-center p-3 bg-brand-100 text-brand-600 rounded-2xl mb-3">
+                    <i data-lucide="user-plus" class="w-6 h-6"></i>
+                </div>
+                <h1 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-800 tracking-tight">Buat Akun Baru</h1>
+                <p class="text-slate-500 text-xs sm:text-sm mt-1">Dapatkan penawar mood terbaik untuk hari-harimu ✨</p>
+            </div>
+
+            <!-- Form -->
+            <form id="registerForm" class="flex flex-col gap-4">
+                
+                <!-- Full Name Field -->
+                <div class="flex flex-col gap-1.5">
+                    <label for="fullName" class="text-xs font-bold text-slate-600 uppercase tracking-wider">Nama Lengkap</label>
+                    <div class="input-container">
+                        <input type="text" id="fullName" class="input-field w-full px-5 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-slate-800 text-sm font-medium" placeholder="Masukkan nama lengkap Anda.." required>
+                        <span class="input-icon "><i data-lucide="user" class="w-5 h-5 "></i></span>
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="flex flex-col gap-1.5">
+                    <label for="email" class="text-xs font-bold text-slate-600 uppercase tracking-wider">Alamat Email</label>
+                    <div class="input-container">
+                        <input type="email" id="email" class="input-field w-full px-5 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-slate-800 text-sm font-medium" placeholder="contoh@domain.com" required>
+                        <span class="input-icon"><i data-lucide="mail" class="w-5 h-5"></i></span>
+                    </div>
+                </div>
+
+                <!-- Phone / WhatsApp Field -->
+                <div class="flex flex-col gap-1.5">
+                    <label for="phone" class="text-xs font-bold text-slate-600 uppercase tracking-wider">Nomor WhatsApp / HP</label>
+                    <div class="input-container">
+                        <input type="tel" id="phone" class="input-field w-full px-5 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-slate-800 text-sm font-medium" placeholder="08xxxxxxxxxx" required>
+                        <span class="input-icon"><i data-lucide="phone" class="w-5 h-5"></i></span>
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="flex flex-col gap-1.5">
+                    <label for="password" class="text-xs font-bold text-slate-600 uppercase tracking-wider">Kata Sandi</label>
+                    <div class="input-container">
+                        <input type="password" id="password" class="input-field w-full px-5 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-slate-800 text-sm font-medium" placeholder="Minimal 8 karakter..." required>
+                        <span class="input-icon"><i data-lucide="lock" class="w-5 h-5"></i></span>
+                        <button type="button" id="togglePassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <!-- Password Strength Meter -->
+                    <div class="w-full bg-slate-100 rounded-full h-1 mt-1 overflow-hidden">
+                        <div id="strengthBar" class="strength-bar w-0"></div>
+                    </div>
+                    <span id="strengthText" class="text-[10px] font-bold text-slate-400 text-right"></span>
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="flex flex-col gap-1.5">
+                    <label for="confirmPassword" class="text-xs font-bold text-slate-600 uppercase tracking-wider">Konfirmasi Kata Sandi</label>
+                    <div class="input-container">
+                        <input type="password" id="confirmPassword" class="input-field w-full px-5 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-slate-800 text-sm font-medium" placeholder="Ketik ulang kata sandi..." required>
+                        <span class="input-icon"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
+                        <button type="button" id="toggleConfirmPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Terms & Privacy Agreement -->
+                <div class="flex items-start gap-2.5 mt-2">
+                    <input type="checkbox" id="terms" class="mt-1 accent-brand-500 rounded focus:ring-brand-500/20 w-4 h-4 cursor-pointer" required>
+                    <label for="terms" class="text-xs text-slate-500 leading-normal cursor-pointer select-none">
+                        Saya menyetujui <a href="#" class="text-brand-500 hover:underline font-bold text-decoration-none">Syarat & Ketentuan</a> serta <a href="#" class="text-brand-500 hover:underline font-bold text-decoration-none">Kebijakan Privasi</a> dari CemilFeels.
+                    </label>
+                </div>
+
+                <!-- Register Button -->
+                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-display font-bold rounded-xl shadow-md hover:shadow-lg shadow-orange-500/10 hover:shadow-orange-500/20 transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-2 mt-2">
+                    Daftar Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </form>
+
+            <!-- Social registration divider -->
+            <div class="relative flex py-3 items-center mt-3">
+                <div class="flex-grow border-t border-slate-200"></div>
+                <span class="flex-shrink mx-4 text-[10px] text-slate-400 uppercase tracking-widest font-extrabold">Atau Daftar Dengan</span>
+                <div class="flex-grow border-t border-slate-200"></div>
+            </div>
+
+            <!-- Social registration buttons -->
+            <div class="grid grid-cols-2 gap-3 mt-1">
+                <button type="button" class="flex items-center justify-center gap-2 py-2.5 border border-slate-200 hover:border-slate-300 rounded-xl hover:bg-slate-50 transition-colors text-slate-600 font-bold text-xs">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-4 h-4" alt="Google Logo"> Google
+                </button>
+                <button type="button" class="flex items-center justify-center gap-2 py-2.5 border border-slate-200 hover:border-slate-300 rounded-xl hover:bg-slate-50 transition-colors text-slate-600 font-bold text-xs">
+                    <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" class="w-4 h-4" alt="Facebook Logo"> Facebook
+                </button>
+            </div>
+
+            <!-- Login redirect -->
+            <p class="text-center text-xs text-slate-500 mt-6 mb-0 select-none">
+                Sudah punya akun? <a href="login.html" class="text-brand-500 hover:underline font-bold text-decoration-none">Masuk di sini</a>
+            </p>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-4 border-t border-gray-200/50 bg-white/50 text-[10px] font-bold text-slate-400 tracking-wider">
+        &copy; 2026 CEMILFEELS THE SNACK PHARMACY. ALL RIGHTS RESERVED.
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Logic JS -->
+    <script src="../js/daftar.js"></script>
+</body>
+</html>
