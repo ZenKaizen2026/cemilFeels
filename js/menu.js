@@ -3,19 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuDatabase = {
         1: [ // Stress / Marah (Opsi Rasa Kuat & Pedas)
             { name: "Bakso Goreng Stick", price: 25000, img: "/img/basrengstik.jpeg" },
-            { name: "Kulpi Balado", price: 18000, img: "/img/kulpi balado.jpeg" }
+            { name: "Kulpi Balado", price: 18000, img: "/img/kulpi_balado.jpeg" }
         ],
         2: [ // Sedih / Galau (Rasa Nyaman & Manis)
-            { name: "Bola-Bola Coklat Creamy", price: 15000, img: "/img/bola bola coklat.jpeg" },
-            { name: "Pisang Goreng Caramel Melt", price: 17000, img: "/img/piscok lumer coklat.jpeg" }
+            { name: "Bola-Bola Coklat Creamy", price: 15000, img: "/img/bola_bola_coklat.jpeg" },
+            { name: "Pisang Goreng Caramel Melt", price: 17000, img: "/img/piscok_lumer_coklat.jpeg" }
         ],
         3: [ // Gabut / Bosan (Camilan Ringan)
-            { name: "Makaroni Bantet", price: 14000, img: "/img/makaroni bantet.jpeg" },
-            { name: "Pangsit", price: 12000, img: "/img/krupuk pangsit.jpeg" }
+            { name: "Makaroni Bantet", price: 14000, img: "/img/makaroni_bantet.jpeg" },
+            { name: "Pangsit", price: 12000, img: "/img/krupuk_pangsit.jpeg" }
         ],
         4: [ // Happy / Lapar (Sajian Kenyang)
-            { name: "Tahu Walik", price: 22000, img: "/img/tahu walik.jpeg" },
-            { name: "Cireng Sambal Rujak", price: 20000, img: "/img/cireng sambal rujak.jpeg" }
+            { name: "Tahu Walik", price: 22000, img: "/img/tahu_walik.jpeg" },
+            { name: "Cireng Sambal Rujak", price: 20000, img: "/img/cireng_sambal_rujak.jpeg" }
         ]
     };
 

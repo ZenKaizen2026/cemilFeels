@@ -18,20 +18,29 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
     color: var(--text-main);
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 40px 20px;
 }
 
 .container {
-    background-color: var(--card-bg);
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     max-width: 800px;
     width: 100%;
     padding: 40px;
     border-radius: var(--radius);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 /* Header */
