@@ -119,7 +119,12 @@
 </head>
 <body id="app-body" class="text-slate-700 antialiased selection:bg-brand-200 selection:text-brand-800 bg-mood-marah overflow-x-hidden">
 
-    <!-- ================= SECTION 1: LANDING PAGE ================= -->
+    <!-- 
+    ========================================================================
+    [COMMAND] run module: 1_LANDING_PAGE_HTML
+    Description: Bagian ini berisi halaman form input nama dan pemilihan mood.
+    ========================================================================
+    -->
     <section id="landing-section" class="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-8 relative z-10 py-12">
         <div class="w-full max-w-3xl flex flex-col gap-6 relative reveal-on-scroll is-visible"> <!-- is-visible by default on load -->
             
@@ -251,7 +256,12 @@
         </div>
     </section>
 
-    <!-- ================= SECTION 2: MENU PANEL ================= -->
+    <!-- 
+    ========================================================================
+    [COMMAND] run module: 2_MENU_PAGE_HTML
+    Description: Bagian ini menampilkan daftar makanan dan minuman sesuai mood.
+    ========================================================================
+    -->
     <section id="menu-section" class="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-8 relative z-20 py-12 hidden">
         
         <!-- Container Menu -->
@@ -318,7 +328,12 @@
         </div>
     </section>
 
-    <!-- ================= SECTION 3: KERANJANG ================= -->
+    <!-- 
+    ========================================================================
+    [COMMAND] run module: 3_CART_PAGE_HTML
+    Description: Bagian akhir untuk meninjau pesanan dan checkout via WA.
+    ========================================================================
+    -->
     <section id="cart-section" class="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-8 relative z-30 py-12 hidden">
         <main class="glass-panel w-full max-w-[420px] rounded-[2.5rem] p-6 sm:p-8 relative overflow-hidden flex flex-col gap-6 shadow-2xl reveal-on-scroll">
             
@@ -392,7 +407,12 @@
         </main>
     </section>
 
-    <!-- ================= MODALS ================= -->
+    <!-- 
+    ========================================================================
+    [COMMAND] run module: 4_GLOBAL_MODALS
+    Description: Ini adalah kode HTML untuk pop-up konfirmasi (Mood & Pedas)
+    ========================================================================
+    -->
     
     <!-- 1. MODAL NOTIFIKASI MOOD -->
     <div class="modal-overlay fixed inset-0 w-full h-full z-[100] flex justify-center items-center p-4" id="moodModal">
@@ -452,6 +472,13 @@
     <!-- ================= SCRIPT ================= -->
     <script>
         lucide.createIcons();
+
+        // 
+        // ========================================================================
+        // [COMMAND] run module: JS_GLOBAL_DATA_&_DATABASE
+        // Description: Inisialisasi state aplikasi dan daftar menu makanan.
+        // ========================================================================
+        // 
 
         // --- GLOBAL STATE ---
         const appState = {
@@ -542,7 +569,14 @@
         // Mulai observasi semua elemen yang punya class 'reveal-on-scroll'
         document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
 
-        // --- SECTION 1: LANDING LOGIC ---
+
+        // 
+        // ========================================================================
+        // [COMMAND] run module: JS_LANDING_LOGIC
+        // Description: Logika untuk mengisi data form, mengubah delivery, dan pop-up mood
+        // ========================================================================
+        // 
+
         function setOrderType(type) {
             appState.orderType = type;
             const cardAmbil = document.getElementById('cardAmbil');
@@ -596,7 +630,14 @@
             }, 100);
         }
 
-        // --- SECTION 2: MENU LOGIC ---
+
+        // 
+        // ========================================================================
+        // [COMMAND] run module: JS_MENU_LOGIC
+        // Description: Merender menu makanan/minuman, modal pedas, dan kalkulasi harga
+        // ========================================================================
+        // 
+
         function renderMenuUI() {
             const data = db[appState.mood];
             
@@ -749,7 +790,14 @@
             }
         }
 
-        // --- SECTION 3: CART LOGIC ---
+
+        // 
+        // ========================================================================
+        // [COMMAND] run module: JS_CART_LOGIC
+        // Description: Logika untuk mengisi data keranjang dan integrasi WhatsApp.
+        // ========================================================================
+        // 
+
         function proceedToCart() {
             if (appState.selectedFoodIds.size === 0 && appState.selectedDrinkIds.size === 0) {
                 alert("Ups! Pilih minimal satu menu dulu ya buat nemenin kamu.");
