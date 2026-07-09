@@ -71,10 +71,12 @@
 
         /* Logo Maskot */
         .login-logo {
-            max-width: 6rem; /* w-24 */
+            width: 6rem; /* w-24 */
             height: auto;
             margin-bottom: 1.25rem; /* mb-5 */
             border-radius: 0.5rem; /* rounded-lg */
+            align-items: center;
+            justify-content: center;
         }
 
         .login-card h2 {
