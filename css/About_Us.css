@@ -339,3 +339,39 @@
             border-top: 1px solid #ffe0b2;
             padding-top: 20px;
         }
+
+        @media (max-width: 640px) {
+            .container-content {
+                padding: 20px 10px;
+                width: 95%;
+            }
+            .hero {
+                padding: 45px 15px;
+                border-radius: 16px;
+            }
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            .hero p {
+                font-size: 0.95rem;
+            }
+            .story-section {
+                margin: 35px 0;
+                gap: 25px;
+            }
+            .story-visual {
+                padding: 25px 15px;
+                border-radius: 16px;
+            }
+            .mission-section {
+                padding: 35px 20px;
+                margin: 35px 0;
+                border-radius: 16px;
+            }
+            .mission-section h2 {
+                margin-bottom: 25px;
+            }
+            .team-section {
+                margin: 35px 0;
+            }
+        }

@@ -14,6 +14,68 @@ document.addEventListener("DOMContentLoaded", () => {
     const togglePasswordBtn = document.getElementById("togglePassword");
     const toggleConfirmPasswordBtn = document.getElementById("toggleConfirmPassword");
 
+    // Modal Elements
+    const customModal = document.getElementById("customModal");
+    const modalCard = document.getElementById("modalCard");
+    const modalIconContainer = document.getElementById("modalIconContainer");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMessage = document.getElementById("modalMessage");
+    const modalCloseBtn = document.getElementById("modalCloseBtn");
+
+    let modalCallback = null;
+
+    // Show Custom Modal function
+    function showModal(type, title, message, callback = null) {
+        modalTitle.innerText = title;
+        modalMessage.innerText = message;
+        modalCallback = callback;
+
+        // Reset and apply style based on type
+        if (type === "success") {
+            modalIconContainer.className = "inline-flex items-center justify-center p-3.5 rounded-2xl mb-4 bg-green-50 text-green-600 border border-green-100";
+            modalIconContainer.innerHTML = '<i data-lucide="check-circle-2" class="w-8 h-8"></i>';
+        } else {
+            // Default to error/warning
+            modalIconContainer.className = "inline-flex items-center justify-center p-3.5 rounded-2xl mb-4 bg-red-50 text-red-600 border border-red-100";
+            modalIconContainer.innerHTML = '<i data-lucide="alert-triangle" class="w-8 h-8"></i>';
+        }
+
+        // Re-initialize Lucide icon inside modal
+        lucide.createIcons();
+
+        // Animate Show Modal
+        customModal.classList.remove("opacity-0", "pointer-events-none");
+        customModal.classList.add("opacity-100", "pointer-events-auto");
+        
+        modalCard.classList.remove("scale-95");
+        modalCard.classList.add("scale-100");
+    }
+
+    // Hide Custom Modal function
+    function hideModal() {
+        customModal.classList.remove("opacity-100", "pointer-events-auto");
+        customModal.classList.add("opacity-0", "pointer-events-none");
+        
+        modalCard.classList.remove("scale-100");
+        modalCard.classList.add("scale-95");
+
+        if (typeof modalCallback === "function") {
+            const cb = modalCallback;
+            modalCallback = null; // Prevent multi-triggering
+            cb();
+        }
+    }
+
+    // Click to Close Modal
+    modalCloseBtn.addEventListener("click", hideModal);
+    
+    // Close when clicking overlay backdrop
+    customModal.addEventListener("click", (e) => {
+        if (e.target === customModal) {
+            hideModal();
+        }
+    });
+
     // Toggle Password Visibility
     togglePasswordBtn.addEventListener("click", () => {
         const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
@@ -81,36 +143,36 @@ document.addEventListener("DOMContentLoaded", () => {
         const confirmPassword = confirmPasswordInput.value;
 
         if (!fullName || !email || !phone || !password || !confirmPassword) {
-            alert("Harap lengkapi seluruh bidang input!");
+            showModal("error", "Pendaftaran Gagal", "Harap lengkapi seluruh bidang input!");
             return;
         }
 
         // Email regex
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert("Format alamat email tidak valid!");
+            showModal("error", "Email Tidak Valid", "Format alamat email tidak valid!");
             return;
         }
 
         // Phone regex (Indonesian standards)
         const phoneRegex = /^(08|628|\+628)[0-9]{8,13}$/;
         if (!phoneRegex.test(phone)) {
-            alert("Nomor telepon tidak valid! Gunakan format Indonesia (contoh: 081234567890).");
+            showModal("error", "Nomor WhatsApp Tidak Valid", "Nomor telepon tidak valid! Gunakan format Indonesia (contoh: 081234567890).");
             return;
         }
 
         if (password.length < 8) {
-            alert("Password minimal harus terdiri dari 8 karakter!");
+            showModal("error", "Kata Sandi Terlalu Pendek", "Password minimal harus terdiri dari 8 karakter!");
             return;
         }
 
         if (password !== confirmPassword) {
-            alert("Konfirmasi password tidak cocok!");
+            showModal("error", "Kata Sandi Tidak Cocok", "Konfirmasi password tidak cocok!");
             return;
         }
 
         if (!termsCheckbox.checked) {
-            alert("Anda harus menyetujui Syarat & Ketentuan untuk mendaftar.");
+            showModal("error", "Syarat & Ketentuan", "Anda harus menyetujui Syarat & Ketentuan untuk mendaftar.");
             return;
         }
 
@@ -122,8 +184,12 @@ document.addEventListener("DOMContentLoaded", () => {
         lucide.createIcons();
 
         setTimeout(() => {
-            alert("Registrasi Berhasil! Selamat bergabung di CemilFeels 🎉");
-            window.location.href = "login.html";
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+            lucide.createIcons();
+            showModal("success", "Registrasi Berhasil", "Registrasi Berhasil! Selamat bergabung di CemilFeels 🎉", () => {
+                window.location.href = "login.html";
+            });
         }, 1500);
     });
 });
