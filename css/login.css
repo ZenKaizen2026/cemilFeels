@@ -7,8 +7,10 @@
         }
 
         body {
-            background-color: #f8fafc; /* slate-50 */
-            color: #334155; /* slate-700 */
+            background-color: #f8fafc;
+            /* slate-50 */
+            color: #334155;
+            /* slate-700 */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -17,28 +19,37 @@
         /* Navbar ala Tailwind - Border tipis, flat, modern */
         .navbar {
             background-color: #ffffff;
-            border-bottom: 1px solid #e2e8f0; /* slate-200 */
-            padding: 1rem 0; /* py-4 */
+            border-bottom: 1px solid #e2e8f0;
+            /* slate-200 */
+            padding: 1rem 0;
+            /* py-4 */
         }
 
         .navbar-nav .nav-link {
-            color: #475569 !important; /* slate-600 */
-            font-weight: 500; /* font-medium */
+            color: #475569 !important;
+            /* slate-600 */
+            font-weight: 500;
+            /* font-medium */
             font-size: 0.937rem;
-            padding: 0.5rem 1rem !important; /* px-4 py-2 */
+            padding: 0.5rem 1rem !important;
+            /* px-4 py-2 */
             transition: color 0.15s ease-in-out;
         }
 
         .navbar-nav .nav-link:hover {
-            color: #ea580c !important; /* orange-600 */
+            color: #ea580c !important;
+            /* orange-600 */
         }
 
         /* Tombol Login Navbar ala Tailwind Button Utility */
         .btn-nav-login {
-            border: 1px solid #ea580c; /* orange-600 */
+            border: 1px solid #ea580c;
+            /* orange-600 */
             color: #ea580c !important;
-            padding: 0.5rem 1.25rem !important; /* px-5 py-2 */
-            border-radius: 0.375rem; /* rounded-md */
+            padding: 0.5rem 1.25rem !important;
+            /* px-5 py-2 */
+            border-radius: 0.375rem;
+            /* rounded-md */
             font-weight: 500;
             text-decoration: none;
             display: inline-block;
@@ -46,7 +57,8 @@
         }
 
         .btn-nav-login:hover {
-            background-color: #fff7ed; /* orange-50 */
+            background-color: #fff7ed;
+            /* orange-50 */
         }
 
         /* Main Container - Centered menggunakan Flexbox */
@@ -55,42 +67,75 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 3rem 1rem; /* py-12 px-4 */
+            padding: 3rem 1rem;
+            /* py-12 px-4 */
         }
 
         /* Card Login - Desain Khas Tailwind (Shadow Ring & Soft Border) */
         .login-card {
             background-color: #ffffff;
-            border: 1px solid #e2e8f0; /* slate-200 */
-            border-radius: 0.75rem; /* rounded-xl */
+            border: 1px solid #e2e8f0;
+            /* slate-200 */
+            border-radius: 0.75rem;
+            /* rounded-xl */
             width: 100%;
-            max-width: 28rem; /* max-w-md */
-            padding: 2.5rem; /* p-10 */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.02); /* shadow-md */
+            max-width: 28rem;
+            /* max-w-md */
+            padding: 2.5rem;
+            /* p-10 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            /* shadow-md */
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         /* Logo Maskot */
         .login-logo {
-            width: 6rem; /* w-24 */
-            height: auto;
-            margin-bottom: 1.25rem; /* mb-5 */
-            border-radius: 0.5rem; /* rounded-lg */
-            align-items: center;
-            justify-content: center;
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Mengatur Gaya Tulisan Brand */
+        .brand-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        /* Mengubah Warna Khusus untuk Kata 'Feels' */
+        .brand-text span {
+            color: #ff9800;
         }
 
         .login-card h2 {
-            font-size: 1.5rem; /* text-2xl */
-            color: #1e293b; /* slate-800 */
-            font-weight: 700; /* font-bold */
-            letter-spacing: -0.025em; /* tracking-tight */
-            margin-bottom: 0.5rem; /* mb-2 */
+            font-size: 1.5rem;
+            /* text-2xl */
+            color: #1e293b;
+            /* slate-800 */
+            font-weight: 700;
+            /* font-bold */
+            letter-spacing: -0.025em;
+            /* tracking-tight */
+            margin-bottom: 0.5rem;
+            /* mb-2 */
         }
 
         .login-card .subtitle {
-            font-size: 0.875rem; /* text-sm */
-            color: #64748b; /* slate-500 */
-            margin-bottom: 2rem; /* mb-8 */
+            font-size: 0.875rem;
+            /* text-sm */
+            color: #64748b;
+            /* slate-500 */
+            margin-bottom: 2rem;
+            /* mb-8 */
         }
 
         /* Gaya Tombol Google Login Instan */
@@ -101,10 +146,13 @@
             gap: 0.75rem;
             width: 100%;
             background-color: #ffffff;
-            border: 1px solid #cbd5e1; /* slate-300 */
-            color: #334155; /* slate-700 */
+            border: 1px solid #cbd5e1;
+            /* slate-300 */
+            color: #334155;
+            /* slate-700 */
             padding: 0.625rem 0.875rem;
-            border-radius: 0.375rem; /* rounded-md */
+            border-radius: 0.375rem;
+            /* rounded-md */
             font-weight: 500;
             font-size: 0.875rem;
             cursor: pointer;
@@ -114,7 +162,8 @@
         }
 
         .btn-google-login:hover {
-            background-color: #f8fafc; /* slate-50 */
+            background-color: #f8fafc;
+            /* slate-50 */
         }
 
         /* Gaya Garis Pembatas (Divider) */
@@ -122,8 +171,10 @@
             display: flex;
             align-items: center;
             text-align: center;
-            color: #94a3b8; /* slate-400 */
-            font-size: 0.75rem; /* text-xs */
+            color: #94a3b8;
+            /* slate-400 */
+            font-size: 0.75rem;
+            /* text-xs */
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-bottom: 1.5rem;
@@ -133,7 +184,8 @@
         .login-divider::after {
             content: '';
             flex: 1;
-            border-bottom: 1px solid #e2e8f0; /* slate-200 */
+            border-bottom: 1px solid #e2e8f0;
+            /* slate-200 */
         }
 
         .login-divider:not(:empty)::before {
@@ -146,32 +198,43 @@
 
         /* Form Controls - Input Fokus Ring ala Tailwind */
         .form-group {
-            margin-bottom: 1.25rem; /* mb-5 */
+            margin-bottom: 1.25rem;
+            /* mb-5 */
             text-align: left;
         }
 
         .form-label {
             display: block;
-            font-weight: 500; /* font-medium */
-            color: #475569; /* slate-600 */
-            font-size: 0.875rem; /* text-sm */
-            margin-bottom: 0.375rem; /* mb-1.5 */
+            font-weight: 500;
+            /* font-medium */
+            color: #475569;
+            /* slate-600 */
+            font-size: 0.875rem;
+            /* text-sm */
+            margin-bottom: 0.375rem;
+            /* mb-1.5 */
         }
 
         .form-control {
             background-color: #ffffff;
-            border: 1px solid #cbd5e1; /* slate-300 */
-            border-radius: 0.375rem; /* rounded-md */
-            padding: 0.625rem 0.875rem; /* px-3.5 py-2.5 */
-            font-size: 0.875rem; /* text-sm */
+            border: 1px solid #cbd5e1;
+            /* slate-300 */
+            border-radius: 0.375rem;
+            /* rounded-md */
+            padding: 0.625rem 0.875rem;
+            /* px-3.5 py-2.5 */
+            font-size: 0.875rem;
+            /* text-sm */
             color: #1e293b;
             width: 100%;
             transition: all 0.15s ease-in-out;
         }
 
         .form-control:focus {
-            border-color: #ea580c; /* orange-600 */
-            box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.15); /* ring-4 ring-orange-500/15 */
+            border-color: #ea580c;
+            /* orange-600 */
+            box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.15);
+            /* ring-4 ring-orange-500/15 */
             outline: none;
             background-color: #ffffff;
         }
@@ -181,8 +244,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 1.5rem; /* mb-6 */
-            font-size: 0.875rem; /* text-sm */
+            margin-bottom: 1.5rem;
+            /* mb-6 */
+            font-size: 0.875rem;
+            /* text-sm */
         }
 
         .remember-me {
@@ -193,44 +258,55 @@
         }
 
         .remember-me input {
-            accent-color: #ea580c; /* warna check sesuai tema orange */
+            accent-color: #ea580c;
+            /* warna check sesuai tema orange */
             width: 1rem;
             height: 1rem;
         }
 
         .forgot-link {
-            color: #ea580c; /* orange-600 */
+            color: #ea580c;
+            /* orange-600 */
             text-decoration: none;
             font-weight: 500;
         }
 
         .forgot-link:hover {
-            color: #c2410c; /* orange-700 */
+            color: #c2410c;
+            /* orange-700 */
         }
 
         /* Tombol Submit Solid Tailwind Style */
         .btn-submit-login {
-            background-color: #ea580c; /* orange-600 */
+            background-color: #ea580c;
+            /* orange-600 */
             color: #ffffff;
             border: none;
             width: 100%;
-            padding: 0.625rem 0.875rem; /* py-2.5 */
-            border-radius: 0.375rem; /* rounded-md */
+            padding: 0.625rem 0.875rem;
+            /* py-2.5 */
+            border-radius: 0.375rem;
+            /* rounded-md */
             font-weight: 500;
-            font-size: 0.875rem; /* text-sm */
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            font-size: 0.875rem;
+            /* text-sm */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            /* shadow-sm */
             transition: background-color 0.15s ease-in-out;
             margin-bottom: 1.5rem;
         }
 
         .btn-submit-login:hover {
-            background-color: #c2410c; /* orange-700 */
+            background-color: #c2410c;
+            /* orange-700 */
         }
 
         /* Footer Prompt */
         .register-prompt {
-            font-size: 0.875rem; /* text-sm */
-            color: #64748b; /* slate-500 */
+            font-size: 0.875rem;
+            /* text-sm */
+            color: #64748b;
+            /* slate-500 */
         }
 
         .register-prompt a {
@@ -247,10 +323,14 @@
         /* Footer bawah */
         .tech-note {
             text-align: center;
-            font-size: 0.75rem; /* text-xs */
-            color: #94a3b8; /* slate-400 */
-            padding: 1.5rem 0; /* py-6 */
-            border-top: 1px solid #f1f5f9; /* slate-100 */
+            font-size: 0.75rem;
+            /* text-xs */
+            color: #94a3b8;
+            /* slate-400 */
+            padding: 1.5rem 0;
+            /* py-6 */
+            border-top: 1px solid #f1f5f9;
+            /* slate-100 */
             background-color: #ffffff;
             width: 100%;
         }
@@ -308,4 +388,3 @@
             box-shadow: 0 6px 15px rgba(255, 152, 0, 0.3) !important;
             transform: translateY(-1px);
         }
-        
