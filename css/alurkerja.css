@@ -325,3 +325,25 @@
             box-shadow: 0 6px 15px rgba(255, 152, 0, 0.3) !important;
             transform: translateY(-1px);
         }
+
+        @media (max-width: 640px) {
+            .main-container {
+                padding: 2rem 0.75rem;
+            }
+            .workflow-card {
+                padding: 2rem 1.25rem;
+            }
+            .workflow-header {
+                margin-bottom: 2.5rem;
+            }
+            .workflow-header h2 {
+                font-size: 1.75rem;
+            }
+            .step-item {
+                padding: 2rem 1.25rem;
+            }
+            .live-preview-box {
+                padding: 1.5rem 1rem;
+                margin-top: 3.5rem;
+            }
+        }
